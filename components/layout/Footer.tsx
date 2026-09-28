@@ -1,31 +1,29 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
-import { ArrowUp, Globe } from "lucide-react";
-import { getAssetPath } from "@/lib/utils";
+import { ArrowUp, Plus, Check } from "lucide-react";
+import DualAsciiHands, { DualAsciiHandsRef, AsciiTheme } from "@/components/ui/DualAsciiHands";
 
 export default function Footer() {
-  const [time, setTime] = useState("");
+  const handsRef = useRef<DualAsciiHandsRef>(null);
+  const [currentTheme, setCurrentTheme] = useState<AsciiTheme>("copper");
+  const [gridActive, setGridActive] = useState<boolean>(false);
 
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-US", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }) + " IST"
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
+  // Form State
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+    setTimeout(() => {
+      setName("");
+      setEmail("");
+    }, 2000);
+  };
 
   const scrollToTop = () => {
     if (typeof window !== "undefined" && (window as any).lenis) {
@@ -36,207 +34,229 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-obsidian-pure text-white pt-24 pb-12 border-t border-white/10 overflow-hidden select-none">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Top Triad Logos Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-white/10 items-start">
-          <div className="md:col-span-6 flex flex-col gap-6">
-            {/* Triad Logos */}
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="relative h-10 w-28 opacity-80 hover:opacity-100 transition-opacity">
-                <Image
-                  src={getAssetPath("/assets/logos/ieee-master.svg")}
-                  alt="IEEE Master"
-                  fill
-                  className="object-contain object-left"
-                />
+    <footer className="relative bg-[#0c0c0c] text-white pt-24 pb-8 overflow-hidden select-none">
+      {/* TOP COLOPHON & DIRECTORY (Good-Fella 3-Column Layout) */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* COLUMN 1 (LEFT, 5 Cols): Future Updates Form & Status Indicators */}
+          <div className="md:col-span-5 flex flex-col gap-4">
+            <h3 className="font-sans text-base font-normal tracking-tight text-white/90">
+              Don&apos;t miss out on future updates.
+            </h3>
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 max-w-sm">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
+                className="w-full bg-[#1c1c1c] border border-white/10 rounded-[3px] px-3.5 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+              />
+
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                className="w-full bg-[#1c1c1c] border border-white/10 rounded-[3px] px-3.5 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+              />
+
+              <div className="flex items-center gap-2 mt-0.5">
+                <button
+                  type="submit"
+                  className="flex-1 bg-white hover:bg-[#ff6b4a] hover:text-white text-black font-mono font-bold text-xs uppercase tracking-wider py-3.5 px-6 rounded-[3px] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  {subscribed ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-black" />
+                      <span>SUBSCRIBED</span>
+                    </>
+                  ) : (
+                    <span>SUBSCRIBE</span>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handsRef.current?.cycleTheme()}
+                  aria-label="Toggle theme or add action"
+                  className="w-11 h-11 bg-[#1c1c1c] border border-white/10 text-white/80 hover:text-white hover:border-white/30 rounded-[3px] flex items-center justify-center transition-colors cursor-pointer shrink-0"
+                >
+                  <Plus className="w-4 h-4" />
+                </button>
               </div>
-              <div className="h-6 w-px bg-white/10" />
-              <div className="relative h-9 w-28 opacity-80 hover:opacity-100 transition-opacity">
-                <Image
-                  src={getAssetPath("/assets/logos/ieee-cs.svg")}
-                  alt="IEEE Computer Society"
-                  fill
-                  className="object-contain object-left"
-                />
+
+              <span className="font-mono text-xs text-white/35 mt-0.5">
+                Unsubscribe anytime.
+              </span>
+            </form>
+
+            {/* Recruitment / Cohort Status Indicators with square bullet marks */}
+            <div className="flex flex-col gap-2 pt-2 font-mono text-xs text-white/70">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-[1px] bg-[#ff4d29] shrink-0 shadow-[0_0_8px_rgba(255,77,41,0.7)]" />
+                <span className="uppercase tracking-wider">
+                  ACCEPTING RESEARCHERS. JOIN THE COHORT.
+                </span>
               </div>
-              <div className="h-6 w-px bg-white/10" />
-              <div className="relative h-9 w-28 opacity-80 hover:opacity-100 transition-opacity">
-                <Image
-                  src={getAssetPath("/assets/logos/mbits-official.png")}
-                  alt="MBITS Student Branch"
-                  fill
-                  className="object-contain object-left brightness-0 invert"
-                />
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-[1px] bg-[#ff4d29] shrink-0 shadow-[0_0_8px_rgba(255,77,41,0.7)]" />
+                <span className="uppercase tracking-wider">
+                  ONLY 4 LAB FELLOWSHIPS AVAILABLE
+                </span>
               </div>
             </div>
+          </div>
 
-            <p className="text-white/60 text-sm max-w-md leading-relaxed">
-              IEEE Computer Society Student Branch Chapter, Mar Athanasius College of
-              Engineering Kothamangalam / MBITS Campus. Advancing computing as a science and
-              profession.
-            </p>
+          {/* COLUMN 2 (CENTER, 3 Cols): Clean Monospace Navigation Column */}
+          <div className="md:col-span-3 lg:col-span-3 flex flex-col gap-3.5 font-mono text-xs sm:text-sm uppercase tracking-wider text-white/70">
+            <Link
+              href="#manifesto"
+              className="hover:text-white transition-colors w-fit"
+            >
+              MANIFESTO
+            </Link>
+            <Link
+              href="#works"
+              className="hover:text-white transition-colors w-fit"
+            >
+              SELECTED WORKS
+            </Link>
+            <Link
+              href="#reveal"
+              className="hover:text-white transition-colors w-fit"
+            >
+              IDEOLOGY
+            </Link>
+            <Link
+              href="#tracks"
+              className="hover:text-white transition-colors w-fit"
+            >
+              TRACKS
+            </Link>
+            <Link
+              href="#membership"
+              className="hover:text-white transition-colors w-fit"
+            >
+              MEMBERSHIP
+            </Link>
+            <Link
+              href="#faq"
+              className="hover:text-white transition-colors w-fit"
+            >
+              PROTOCOL FAQ
+            </Link>
+          </div>
 
-            <div className="flex items-center gap-2 font-mono text-xs text-white/40">
-              <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
-              <span>MBITS Campus, Kerala</span>
+          {/* COLUMN 3 (RIGHT, 4 Cols): Contact Links, Legal Notices & Interactive Keys */}
+          <div className="md:col-span-4 flex flex-col gap-5 text-sm">
+            {/* Direct Email Lines */}
+            <div className="flex flex-col gap-1.5 font-sans">
+              <a
+                href="mailto:ieee.cs@mbits.ac.in"
+                className="text-white/70 hover:text-white transition-colors underline decoration-white/20 underline-offset-4 w-fit"
+              >
+                ieee.cs@mbits.ac.in
+              </a>
+              <a
+                href="mailto:chair.cs@mbits.ac.in"
+                className="text-white/70 hover:text-white transition-colors underline decoration-white/20 underline-offset-4 w-fit"
+              >
+                chair.cs@mbits.ac.in
+              </a>
+              <a
+                href="mailto:research.cs@mbits.ac.in"
+                className="text-white/70 hover:text-white transition-colors underline decoration-white/20 underline-offset-4 w-fit"
+              >
+                research.cs@mbits.ac.in
+              </a>
+            </div>
+
+            {/* Legal / Policy Links */}
+            <div className="flex flex-col gap-1 text-xs text-white/50">
+              <a
+                href="https://www.ieee.org/about/help/security-privacy.html"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition-colors underline decoration-white/10 underline-offset-2 w-fit"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="https://www.ieee.org/about/corporate/governance/p9-26.html"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-white transition-colors underline decoration-white/10 underline-offset-2 w-fit"
+              >
+                Legal Notice & Ethics
+              </a>
+            </div>
+
+            {/* Interactive Keyboard Shortcuts / Action Toggles (Good-Fella Signature) */}
+            <div className="flex flex-col gap-2 pt-2">
+              {/* Grid Toggle */}
+              <button
+                type="button"
+                onClick={() => handsRef.current?.toggleGrid()}
+                className="flex items-center gap-2.5 font-mono text-xs text-white/40 hover:text-white/80 transition-colors cursor-pointer text-left w-fit group"
+              >
+                <span className="px-1.5 py-0.5 rounded-[2px] bg-white/10 text-white/70 text-[10px] tracking-tight group-hover:bg-white/20 transition-colors">
+                  ⌘G
+                </span>
+                <span className={gridActive ? "text-lime" : ""}>
+                  grid {gridActive ? "(active)" : ""}
+                </span>
+              </button>
+
+              {/* Theme / Color Cycle */}
+              <button
+                type="button"
+                onClick={() => handsRef.current?.cycleTheme()}
+                className="flex items-center gap-2.5 font-mono text-xs text-white/40 hover:text-white/80 transition-colors cursor-pointer text-left w-fit group"
+              >
+                <span className="px-1.5 py-0.5 rounded-[2px] bg-white/10 text-white/70 text-[10px] tracking-tight group-hover:bg-white/20 transition-colors">
+                  C
+                </span>
+                <span>
+                  change color{" "}
+                  <span className="text-white/60">({currentTheme})</span>
+                </span>
+              </button>
             </div>
           </div>
 
-          {/* Directory Columns */}
-          <div className="md:col-span-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-white/50 block mb-4">
-              Navigation
-            </span>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <a
-                  href="#manifesto"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  Manifesto
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#works"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  Selected Works
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#reveal"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  Ideology
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#tracks"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  Tracks
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#membership"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  Fellowship
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#faq"
-                  className="text-white/70 hover:text-white transition-colors"
-                >
-                  FAQ
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="md:col-span-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-white/50 block mb-4">
-              Community
-            </span>
-            <ul className="space-y-2.5 text-sm">
-              <li>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4 fill-current text-lime" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                  </svg>
-                  <span>GitHub Organization</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4 fill-current text-lime" viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                  </svg>
-                  <span>LinkedIn Chapter</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4 fill-current text-lime" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                  <span>Twitter / X Updates</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://computer.org"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/70 hover:text-white transition-colors flex items-center gap-2"
-                >
-                  <Globe className="w-4 h-4 text-lime" />
-                  <span>IEEE Computer Society Global</span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
-
       </div>
 
-      {/* Monumental Full-Bleed Watermark Marquee in Syne (Matches Habito Studio Footer Marquee) */}
-      <div className="py-10 sm:py-16 border-y border-white/10 overflow-hidden select-none w-full my-8 bg-black/40">
-        <div className="flex items-center gap-8 whitespace-nowrap animate-marquee hover:[animation-play-state:paused]">
-          {[0, 1, 2, 3].map((setIdx) => (
-            <div key={setIdx} className="flex items-center gap-8 shrink-0">
-              <span className="font-display font-extrabold uppercase text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter text-white/5 hover:text-white/10 transition-colors">
-                IEEE COMPUTER SOCIETY
-              </span>
-              <span className="w-3 h-3 rounded-full bg-lime/20 shrink-0" />
-              <span className="font-display font-extrabold uppercase text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter text-lime/10 hover:text-lime/20 transition-colors">
-                MBITS #14591
-              </span>
-              <span className="w-3 h-3 rounded-full bg-lime/20 shrink-0" />
-            </div>
-          ))}
-        </div>
+      {/* MIDDLE SECTION: DUAL ASCII HANDS CONVERGENCE STAGE + WATERMARK */}
+      <div className="w-full relative mt-2">
+        <DualAsciiHands
+          ref={handsRef}
+          leftHandSrc="/assets/hands/lefthand.png"
+          rightHandSrc="/assets/hands/righthand.png"
+          initialTheme="copper"
+          onThemeChange={setCurrentTheme}
+          onGridChange={setGridActive}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
-
-        {/* Bottom Bar with Back to Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
-          <div className="flex items-center gap-2">
-            <span>© 2026 IEEE CS MBITS CHAPTER #14591</span>
-            <span>•</span>
-            <span>ALL RIGHTS RESERVED</span>
-          </div>
-
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-lime hover:text-lime transition-all duration-300"
-          >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+      {/* BOTTOM UTILITY BAR */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40 border-t border-white/5">
+        <div className="flex items-center gap-2">
+          <span>MBITS CHAPTER #14591</span>
+          <span>•</span>
+          <span>KERALA, INDIA</span>
         </div>
+
+        <button
+          onClick={scrollToTop}
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-lime hover:text-lime transition-all duration-300 cursor-pointer"
+        >
+          <span>BACK TO TOP</span>
+          <ArrowUp className="w-3.5 h-3.5" />
+        </button>
       </div>
     </footer>
   );
