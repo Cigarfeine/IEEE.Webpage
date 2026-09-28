@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Check, Globe } from "lucide-react";
@@ -11,25 +11,6 @@ export default function Footer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(
-        now.toLocaleTimeString("en-US", {
-          timeZone: "Asia/Kolkata",
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: false,
-        }) + " IST"
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,62 +36,61 @@ export default function Footer() {
       {/* TOP TIER: Brand Triad + Editorial 3-Column Directory */}
       <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full flex-none">
         
-        {/* BRAND TRIAD LOGOS & CHAPTER BADGE */}
-        <div className="flex flex-wrap items-center gap-5 pb-5 border-b border-white/10">
-          <div className="relative h-7 w-24 opacity-85 hover:opacity-100 transition-opacity">
+        {/* ENLARGED & HIGHLY DEFINED BRAND TRIAD LOGOS */}
+        <div className="flex flex-wrap items-center gap-6 sm:gap-8 pb-6 border-b border-white/10">
+          <div className="relative h-9 sm:h-10 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/ieee-master.svg")}
               alt="IEEE Master"
               fill
               className="object-contain object-left"
+              priority
             />
           </div>
-          <div className="h-4 w-px bg-white/15" />
-          <div className="relative h-6 w-24 opacity-85 hover:opacity-100 transition-opacity">
+          <div className="h-6 w-px bg-white/20" />
+          <div className="relative h-8 sm:h-9 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/ieee-cs.svg")}
               alt="IEEE Computer Society"
               fill
               className="object-contain object-left"
+              priority
             />
           </div>
-          <div className="h-4 w-px bg-white/15" />
-          <div className="relative h-6 w-24 opacity-85 hover:opacity-100 transition-opacity">
+          <div className="h-6 w-px bg-white/20" />
+          <div className="relative h-8 sm:h-9 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/mbits-official.png")}
               alt="MBITS Student Branch"
               fill
               className="object-contain object-left brightness-0 invert"
+              priority
             />
           </div>
-          <div className="ml-auto hidden md:flex items-center gap-2 font-mono text-[11px] text-white/50">
-            <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+          <div className="ml-auto hidden md:flex items-center gap-2.5 font-mono text-xs text-white/60 tracking-wider uppercase">
+            <span className="w-2 h-2 rounded-full bg-lime shadow-[0_0_8px_rgba(203,235,58,0.7)] animate-pulse" />
             <span>MBITS Campus, Kerala · Chapter #14591</span>
           </div>
         </div>
 
-        {/* 3-COLUMN COMPACT DIRECTORY */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pt-5 pb-2 items-start">
+        {/* 3-COLUMN MINIMAL DIRECTORY (Zero AI Slop Labels) */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-14 pt-6 pb-2 items-start">
           
           {/* COLUMN 1: Chapter Mission & Dispatches (5 Cols) */}
-          <div className="md:col-span-5 flex flex-col gap-3">
+          <div className="md:col-span-5 flex flex-col gap-3.5">
             <p className="text-white/70 text-xs sm:text-[13px] leading-relaxed max-w-md font-sans">
-              IEEE Computer Society Student Branch Chapter, MBITS Campus. Advancing computing
-              through resilient systems, intelligent pipelines, and open research.
+              MBITS IEEE Computer Society is the flagship chapter for production-grade
+              systems engineering, applied machine intelligence, and distributed architecture.
             </p>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-sm">
-              <span className="font-mono text-[11px] text-white/60 uppercase tracking-wider block">
-                Don&apos;t miss out on future dispatches
-              </span>
-
+            <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-sm pt-1">
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3 py-1.5 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
+                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3.5 py-2 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
                 />
                 <input
                   type="email"
@@ -118,14 +98,14 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@domain.edu"
-                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3 py-1.5 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
+                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3.5 py-2 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="flex items-center gap-1.5 mt-0.5">
                 <button
                   type="submit"
-                  className="flex-1 bg-lime hover:bg-lime/90 text-obsidian font-mono font-bold text-xs uppercase tracking-wider py-2 px-3.5 rounded-sm transition-all duration-200 flex items-center justify-between cursor-pointer shadow-[0_0_12px_rgba(203,235,58,0.2)]"
+                  className="flex-1 bg-lime hover:bg-lime/90 text-obsidian font-mono font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-sm transition-all duration-200 flex items-center justify-between cursor-pointer shadow-[0_0_12px_rgba(203,235,58,0.2)]"
                 >
                   {subscribed ? (
                     <span className="flex items-center gap-1.5">
@@ -138,7 +118,7 @@ export default function Footer() {
                 </button>
               </div>
 
-              <div className="flex flex-col gap-1 pt-0.5 font-mono text-[10px] text-white/50">
+              <div className="flex flex-col gap-1 pt-1 font-mono text-[10px] text-white/50">
                 <div className="flex items-center gap-1.5">
                   <span className="text-lime">■</span>
                   <span className="uppercase tracking-wider">
@@ -155,16 +135,13 @@ export default function Footer() {
             </form>
           </div>
 
-          {/* COLUMN 2: Navigation Directory (3 Cols) */}
+          {/* COLUMN 2: Navigation Directory (3 Cols - Naked Minimalist Links) */}
           <div className="md:col-span-3 flex flex-col gap-2 font-mono text-xs">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-lime/90 block mb-1">
-              01 // NAVIGATION
-            </span>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               <li>
                 <Link
                   href="#manifesto"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   MANIFESTO
                 </Link>
@@ -172,7 +149,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#works"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   SELECTED WORKS
                 </Link>
@@ -180,7 +157,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#reveal"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   IDEOLOGY
                 </Link>
@@ -188,7 +165,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#tracks"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   ENGINEERING TRACKS
                 </Link>
@@ -196,7 +173,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#membership"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   FELLOWSHIP PLANS
                 </Link>
@@ -204,7 +181,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#faq"
-                  className="text-white/70 hover:text-white transition-colors"
+                  className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
                   PROTOCOL FAQ
                 </Link>
@@ -212,11 +189,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* COLUMN 3: Communication & Lab Contacts (4 Cols) */}
+          {/* COLUMN 3: Communication & Lab Contacts (4 Cols - Naked Direct Links) */}
           <div className="md:col-span-4 flex flex-col gap-2 text-xs">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-lime/90 block mb-1">
-              02 // COMMUNICATION &amp; LAB
-            </span>
             <div className="flex flex-col gap-1.5 font-mono text-xs">
               <a
                 href="mailto:ieee.cs@mbits.ac.in"
@@ -238,14 +212,14 @@ export default function Footer() {
               </a>
             </div>
 
-            <div className="pt-2 flex flex-col gap-1 text-[11px] text-white/50">
+            <div className="pt-3 flex flex-col gap-1.5 text-[11px] text-white/50">
               <a
                 href="https://computer.org"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:text-white transition-colors flex items-center gap-1.5"
               >
-                <Globe className="w-3 h-3 text-lime" />
+                <Globe className="w-3.5 h-3.5 text-lime" />
                 <span>IEEE Computer Society Global</span>
               </a>
               <a
@@ -254,7 +228,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="hover:text-white transition-colors underline decoration-white/10 underline-offset-2 w-fit"
               >
-                IEEE Privacy Policy
+                Privacy Policy
               </a>
               <a
                 href="https://www.ieee.org/about/corporate/governance/p9-26.html"
@@ -262,7 +236,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="hover:text-white transition-colors underline decoration-white/10 underline-offset-2 w-fit"
               >
-                IEEE Code of Ethics
+                Code of Ethics
               </a>
             </div>
           </div>
@@ -278,7 +252,7 @@ export default function Footer() {
         />
       </div>
 
-      {/* BOTTOM TIER: Full-Width Typographic Watermark + Utility Bar */}
+      {/* BOTTOM TIER: Full-Width Typographic Watermark + Minimal Utility Bar */}
       <div className="w-full flex-none flex flex-col mt-auto">
         
         {/* Large Typographic Watermark (100% Vector Visible Edge-to-Edge) */}
@@ -306,18 +280,12 @@ export default function Footer() {
           </svg>
         </div>
 
-        {/* BOTTOM UTILITY BAR */}
+        {/* MINIMAL BOTTOM UTILITY BAR (No Time Clock) */}
         <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full pt-3 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-white/40 border-t border-white/5">
-          <div className="flex flex-wrap items-center gap-2 text-[11px]">
+          <div className="flex flex-wrap items-center gap-2 text-[11px] tracking-wider uppercase">
             <span>© 2026 IEEE CS MBITS CHAPTER #14591</span>
             <span>•</span>
             <span>ALL RIGHTS RESERVED</span>
-            {time && (
-              <>
-                <span>•</span>
-                <span className="text-lime/70">{time}</span>
-              </>
-            )}
           </div>
 
           <button
