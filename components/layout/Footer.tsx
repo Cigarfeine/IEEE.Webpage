@@ -76,18 +76,16 @@ export default function Footer() {
               profession.
             </p>
 
-            <div className="flex items-center gap-3 font-mono text-xs text-white/50">
-              <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
-              <span>SERVER TIME: {time || "12:00:00 IST"}</span>
-              <span>•</span>
-              <span>GEO: 09.98°N, 76.58°E</span>
+            <div className="flex items-center gap-2 font-mono text-xs text-white/40">
+              <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
+              <span>MBITS Campus, Kerala</span>
             </div>
           </div>
 
           {/* Directory Columns */}
           <div className="md:col-span-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-lime block mb-4">
-              // CHAPTER DIRECTORY
+            <span className="font-mono text-xs uppercase tracking-widest text-white/50 block mb-4">
+              Navigation
             </span>
             <ul className="space-y-2.5 text-sm">
               <li>
@@ -95,7 +93,7 @@ export default function Footer() {
                   href="#manifesto"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  About Manifesto
+                  Manifesto
                 </a>
               </li>
               <li>
@@ -103,7 +101,7 @@ export default function Footer() {
                   href="#works"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  Flagship Works
+                  Selected Works
                 </a>
               </li>
               <li>
@@ -111,7 +109,7 @@ export default function Footer() {
                   href="#reveal"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  Architectural Reveal
+                  Ideology
                 </a>
               </li>
               <li>
@@ -119,7 +117,7 @@ export default function Footer() {
                   href="#tracks"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  Technical Tracks
+                  Tracks
                 </a>
               </li>
               <li>
@@ -127,7 +125,7 @@ export default function Footer() {
                   href="#membership"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  Membership Tiers
+                  Fellowship
                 </a>
               </li>
               <li>
@@ -135,15 +133,15 @@ export default function Footer() {
                   href="#faq"
                   className="text-white/70 hover:text-white transition-colors"
                 >
-                  FAQ &amp; Support
+                  FAQ
                 </a>
               </li>
             </ul>
           </div>
 
           <div className="md:col-span-3">
-            <span className="font-mono text-xs uppercase tracking-widest text-lime block mb-4">
-              // TELEMETRY &amp; SOCIAL
+            <span className="font-mono text-xs uppercase tracking-widest text-white/50 block mb-4">
+              Community
             </span>
             <ul className="space-y-2.5 text-sm">
               <li>

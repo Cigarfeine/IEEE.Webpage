@@ -254,9 +254,9 @@ export default function ExpandingReveal() {
       >
         {/* Editorial Eyebrow Badge */}
         <div ref={badgeRef} className="mb-6 sm:mb-8">
-          <span className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-lime px-4 py-1.5 rounded-full bg-lime/10 border border-lime/25 inline-flex items-center gap-2 shadow-[inset_0_1px_0_rgba(203,235,58,0.2)]">
+          <span className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-white/60 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 inline-flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
-            // ARCHITECTURE & PRODUCTION TESTBED // SPEC 02
+            Core Philosophy
           </span>
         </div>
 
@@ -272,12 +272,12 @@ export default function ExpandingReveal() {
           >
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
-              <span className="text-white font-bold uppercase tracking-wider text-[11px] sm:text-xs">
-                WE ENGINEER PRODUCTION SYSTEMS THAT SCALE
+              <span className="text-white font-medium uppercase tracking-wider text-[11px] sm:text-xs">
+                Production Systems That Endure
               </span>
             </div>
-            <span className="hidden sm:inline-block text-lime text-[11px] sm:text-xs font-bold">
-              IEEE CS CHAPTER #14591
+            <span className="hidden sm:inline-block text-white/50 text-[11px] sm:text-xs font-mono">
+              IEEE Computer Society
             </span>
           </div>
 

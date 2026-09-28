@@ -99,20 +99,12 @@ export default function MembershipPlans() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 border border-black/10 font-mono text-xs uppercase tracking-widest text-petrol mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            MEMBERSHIP DIRECTORY // 2025–2026
-          </div>
-          <h2 className="font-display font-extrabold uppercase text-3xl sm:text-5xl md:text-6xl tracking-tighter leading-tight text-black mb-6">
-            INVEST IN YOUR <br />
-            <span className="font-serif italic font-normal text-petrol lowercase tracking-normal">
-              engineering
-            </span>{" "}
-            FUTURE.
+          <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight leading-tight text-black mb-4">
+            Fellowship Plans.
           </h2>
-          <p className="text-black/70 text-base sm:text-lg">
-            Choose your membership tier, join an active technical directorate, and
-            commence your production development journey tomorrow.
+          <p className="text-black/60 text-base sm:text-lg max-w-xl">
+            Choose your fellowship tier, join an active technical directorate, and
+            commence production development.
           </p>
 
           {/* Habito-style Interactive Sliding Pill Switch */}

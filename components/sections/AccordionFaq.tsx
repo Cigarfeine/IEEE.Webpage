@@ -38,16 +38,8 @@ export default function AccordionFaq() {
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 font-mono text-xs uppercase tracking-widest text-lime mb-4">
-            <HelpCircle className="w-3.5 h-3.5" />
-            FREQUENTLY ASKED QUESTIONS
-          </div>
-          <h2 className="font-display font-extrabold uppercase text-3xl sm:text-5xl tracking-tighter leading-tight text-white mb-4">
-            EVERYTHING YOU <br />
-            <span className="font-serif italic font-normal text-lime lowercase tracking-normal">
-              need to
-            </span>{" "}
-            KNOW.
+          <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight leading-tight text-white mb-4">
+            Frequently Asked Questions.
           </h2>
           <p className="text-white/60 text-sm sm:text-base">
             Common questions regarding chapter enrollment, technical tracks, and membership

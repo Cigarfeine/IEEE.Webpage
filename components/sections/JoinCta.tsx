@@ -33,17 +33,10 @@ export default function JoinCta() {
 
       <div className="max-w-4xl mx-auto px-6 sm:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-lime/10 border border-lime/30 font-mono text-xs uppercase tracking-widest text-lime mb-4">
-            <Sparkles className="w-3.5 h-3.5" />
-            APPLICATION PORTAL // FALL 2026
-          </div>
-          <h2 className="font-display font-extrabold uppercase text-3xl sm:text-5xl md:text-6xl tracking-tighter leading-tight text-white mb-6">
-            READY TO BUILD <br />
-            <span className="font-serif italic font-normal text-lime lowercase tracking-normal">
-              with us?
-            </span>
+          <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight leading-tight text-white mb-6">
+            Ready to build with us?
           </h2>
-          <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+          <p className="text-white/60 text-sm sm:text-base leading-relaxed">
             Submit your profile to join our active engineering cohorts. Our admissions
             panel reviews applications on a rolling basis.
           </p>

@@ -96,26 +96,15 @@ export default function DirectorateTracks() {
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
-        <div className="flex flex-wrap items-end justify-between gap-6 pb-8 border-b border-white/10 mb-16">
+        <div className="flex flex-wrap items-end justify-between gap-6 pb-6 border-b border-white/10 mb-16">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-lime" />
-              <span className="font-mono text-xs uppercase tracking-widest text-lime">
-                *SPECIALIZED DIRECTORATES
-              </span>
-            </div>
-            <h2 className="font-display font-extrabold uppercase text-3xl sm:text-5xl md:text-6xl tracking-tighter leading-none">
-              TECHNICAL TRACKS &amp; <br />
-              <span className="font-serif italic font-normal text-lime lowercase tracking-normal">
-                engineering
-              </span>{" "}
-              DISCIPLINES
+            <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight leading-none text-white">
+              Engineering Tracks.
             </h2>
           </div>
 
-          <div className="font-mono text-xs text-white/50 max-w-xs">
-            Every member selects a primary and secondary technical track to focus their
-            research and project execution.
+          <div className="text-sm text-white/50 max-w-sm font-normal">
+            Specialized engineering directorates focused on deep systems, machine intelligence, and kernel security.
           </div>
         </div>
 

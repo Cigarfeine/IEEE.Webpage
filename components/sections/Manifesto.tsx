@@ -160,19 +160,13 @@ export default function Manifesto() {
       <SectionOverlay id="manifesto-overlay" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
-        {/* Section Header with Editorial Index */}
-        <div className="flex flex-wrap items-center justify-between pb-8 border-b border-black/10 mb-16 gap-4">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-petrol">
-              *ABOUT US
-            </span>
-            <span className="text-black/30">•</span>
-            <span className="font-mono text-xs text-black/60 uppercase">
-              CHAPTER MANIFESTO &amp; IDEOLOGY
-            </span>
-          </div>
-          <span className="font-mono text-xs text-black/60">
-            MBITS CAMPUS // 2025–2026
+        {/* Section Header */}
+        <div className="flex items-center justify-between pb-6 border-b border-black/10 mb-16">
+          <span className="font-mono text-xs text-black/50 uppercase tracking-widest">
+            Chapter Manifesto
+          </span>
+          <span className="font-mono text-xs text-black/40">
+            2026
           </span>
         </div>
 
@@ -191,11 +185,11 @@ export default function Manifesto() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-lime block mb-1">
-                  EXECUTIVE COMMITTEE
+                <span className="font-mono text-[10px] uppercase tracking-widest text-lime/90 block mb-1">
+                  Leadership Council
                 </span>
-                <span className="font-display font-bold text-lg">
-                  MBITS Chapter Leadership Council
+                <span className="font-display font-medium text-base">
+                  Executive Committee
                 </span>
               </div>
             </div>
@@ -270,8 +264,8 @@ export default function Manifesto() {
                   How we work.
                 </h3>
               </div>
-              <span className="font-mono text-xs text-petrol font-bold uppercase tracking-widest">
-                // PROCESS &amp; DISCIPLINES
+              <span className="font-mono text-xs text-petrol font-medium uppercase tracking-wider">
+                Core Disciplines
               </span>
             </div>
 
@@ -350,8 +344,8 @@ export default function Manifesto() {
 
                         {/* Bottom Metadata Tag */}
                         <div className="absolute bottom-6 left-6 right-6 text-white z-20">
-                          <span className="font-mono text-xs uppercase tracking-widest text-lime block mb-1">
-                            // DISCIPLINE {pillar.idx}
+                          <span className="font-mono text-xs uppercase tracking-widest text-lime/90 block mb-1">
+                            Discipline {pillar.idx}
                           </span>
                           <span className="font-display font-bold text-xl block">
                             {pillar.title}
@@ -371,8 +365,8 @@ export default function Manifesto() {
               <h3 className="font-display font-bold text-3xl sm:text-4xl text-black">
                 How we work.
               </h3>
-              <span className="font-mono text-xs text-petrol font-bold uppercase tracking-wider">
-                // PROCESS
+              <span className="font-mono text-xs text-petrol font-medium uppercase tracking-wider">
+                Core Disciplines
               </span>
             </div>
 
@@ -403,8 +397,8 @@ export default function Manifesto() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">
-                    <span className="font-mono text-[10px] uppercase text-lime block">
-                      // DISCIPLINE {pillar.idx}
+                    <span className="font-mono text-[10px] uppercase text-lime/90 block">
+                      Discipline {pillar.idx}
                     </span>
                     <span className="font-display font-bold text-base">
                       {pillar.title}

@@ -28,7 +28,7 @@ export default function FlagshipWorks() {
     {
       id: "01",
       title: "KRAKEN EBPF KERNEL",
-      discipline: "[SYSTEMS KERNEL] — [C / RUST]",
+      discipline: "Systems Kernel · C / Rust",
       year: "2026",
       image: "/assets/gallery/fig4-lecture.jpg",
       desc: "Low-overhead Linux kernel observability instrumentation and high-throughput network packet telemetry.",
@@ -37,7 +37,7 @@ export default function FlagshipWorks() {
     {
       id: "02",
       title: "NEURAL ACCELERATOR",
-      discipline: "[NEURAL ENGINE] — [PYTORCH / CUDA]",
+      discipline: "Neural Engine · PyTorch / CUDA",
       year: "2025",
       image: "/assets/gallery/fig1-workshop.jpg",
       desc: "Distributed transformer inference engine with 4-bit INT4 quantization and custom flash-attention kernels.",
@@ -46,7 +46,7 @@ export default function FlagshipWorks() {
     {
       id: "03",
       title: "HACKGENESIS 48H",
-      discipline: "[DISTRIBUTED SYSTEMS] — [NEXT.JS / GO]",
+      discipline: "Distributed Systems · Next.js / Go",
       year: "2025",
       image: "/assets/gallery/fig2-hackathon.jpg",
       desc: "48-hour continuous software sprint deploying 40+ concurrent real-time microservices across 200+ engineers.",
@@ -55,7 +55,7 @@ export default function FlagshipWorks() {
     {
       id: "04",
       title: "DISTRIBUTED CONSENSUS RAFT",
-      discipline: "[FAULT TOLERANCE] — [RUST / DISTRIBUTED]",
+      discipline: "Consensus Engine · Rust",
       year: "2024",
       image: "/assets/gallery/fig3-committee.jpg",
       desc: "Byzantine-resilient distributed state replication engine with sub-5ms heartbeat failover and formal verification.",
@@ -186,14 +186,6 @@ export default function FlagshipWorks() {
              ======================================================== */}
           <div className="lg:col-span-4 lg:sticky lg:top-28 self-start flex flex-col justify-between h-auto lg:min-h-[560px] py-2">
             <div>
-              {/* Eyebrow Label */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <span className="w-2 h-2 rounded-full bg-lime animate-pulse" />
-                <span className="font-mono text-xs uppercase tracking-widest text-lime">
-                  *FLAGSHIP INITIATIVES
-                </span>
-              </div>
-
               {/* Monumental Headline */}
               <h2 className="font-sans font-bold text-5xl sm:text-6xl lg:text-[4.25rem] tracking-[-0.04em] text-white leading-[0.95]">
                 Selected<br />
