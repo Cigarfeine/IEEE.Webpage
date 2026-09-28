@@ -109,32 +109,32 @@ export default function Navbar() {
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
-              className="group flex cursor-pointer items-center gap-2.5 sm:gap-3.5 transition-opacity duration-300 hover:opacity-75 text-white uppercase tracking-wider text-xs sm:text-base font-mono font-medium select-none"
+              className="group flex cursor-pointer items-center gap-2 transition-opacity duration-300 hover:opacity-75 text-white uppercase tracking-tight text-sm sm:text-base font-mono font-medium select-none"
             >
               {/* Rolling Dual Text */}
-              <span className="relative h-[1.25em] w-[3.8em] sm:w-[4.4em] overflow-hidden leading-none text-left">
+              <span className="relative h-[1.15em] w-[3.3em] sm:w-[3.4em] overflow-hidden leading-none text-left">
                 <span
                   className="flex flex-col gap-1 transition-transform duration-300 ease-out"
                   style={{
-                    transform: menuOpen ? "translateY(calc(-1.25em - 4px))" : "translateY(0px)",
+                    transform: menuOpen ? "translateY(calc(-1.15em - 4px))" : "translateY(0px)",
                   }}
                 >
-                  <span className="flex items-center h-[1.25em] leading-none">Menu</span>
-                  <span className="flex items-center h-[1.25em] leading-none text-lime font-bold">Close</span>
+                  <span className="flex items-center h-[1.15em] leading-none">Menu</span>
+                  <span className="flex items-center h-[1.15em] leading-none text-lime font-bold">Close</span>
                 </span>
               </span>
 
               {/* Good-Fella 2-Line Morphing Icon */}
-              <span className="relative flex shrink-0 h-4 w-4 sm:h-5 sm:w-5 flex-col items-center justify-center">
+              <span className="relative flex shrink-0 h-4 w-4 flex-col items-center justify-center">
                 <span
-                  className="absolute h-[1.5px] sm:h-[2px] w-full origin-center transition-all duration-300 ease-out"
+                  className="absolute h-[2px] w-full origin-center transition-all duration-300 ease-out"
                   style={{
                     transform: menuOpen ? "rotate(45deg) translateY(0px)" : "rotate(0deg) translateY(-3px)",
                     backgroundColor: menuOpen ? "#CBEB3A" : "currentColor",
                   }}
                 />
                 <span
-                  className="absolute h-[1.5px] sm:h-[2px] w-full origin-center transition-all duration-300 ease-out"
+                  className="absolute h-[2px] w-full origin-center transition-all duration-300 ease-out"
                   style={{
                     transform: menuOpen ? "rotate(-45deg) translateY(0px)" : "rotate(0deg) translateY(3px)",
                     backgroundColor: menuOpen ? "#CBEB3A" : "currentColor",
