@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-ease: cubic-bezier(0.62, 0.05, 0.01, 0.99);
+  --primary-ease-out: cubic-bezier(0.17, 0.84, 0.44, 1);
+  --bg-obsidian: #0B0F0E;
+  --bg-petrol: #01565B;
+  --canvas-paper: #F7F7F5;
+  --accent-lime: #CBEB3A;
+  --scrim-overlay: #181818;
+
+  /* shadcn semantic tokens */
+  --background: #0B0F0E;
+  --foreground: #F7F7F5;
+  --color-background: #0B0F0E;
+  --color-foreground: #F7F7F5;
+  --color-muted-foreground: #8A9491;
+  --primary: #CBEB3A;
+  --primary-foreground: #0B0F0E;
+  --muted: #141A19;
+  --muted-foreground: #8A9491;
+  --accent: #111615;
+  --accent-foreground: #F7F7F5;
+  --border: rgba(255, 255, 255, 0.12);
+  --ring: #CBEB3A;
+}
+
+/* Lenis smooth scroll recommended rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0F0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #222B29;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #CBEB3A;
+}
+
+/* Global Selection */
+::selection {
+  background-color: #CBEB3A;
+  color: #0B0F0E;
+}
+
+/* Stacked card scrim overlay */
+.g_section-overlay {
+  background-color: #181818;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 30;
+  inset: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Scanline effect for ASCII */
+.crt-scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Subtle glow */
+.lime-glow {
+  box-shadow: 0 0 35px -5px rgba(203, 235, 58, 0.35);
+}
+
+.petrol-glow {
+  box-shadow: 0 0 45px -10px rgba(1, 86, 91, 0.5);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
