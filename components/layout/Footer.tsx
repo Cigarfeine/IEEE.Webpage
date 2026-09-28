@@ -36,9 +36,9 @@ export default function Footer() {
       {/* TOP TIER: Brand Triad + Editorial 3-Column Directory */}
       <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full flex-none">
         
-        {/* ENLARGED & HIGHLY DEFINED BRAND TRIAD LOGOS */}
+        {/* ENLARGED & BALANCED BRAND TRIAD LOGOS */}
         <div className="flex flex-wrap items-center gap-6 sm:gap-8 pb-6 border-b border-white/10">
-          <div className="relative h-9 sm:h-10 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
+          <div className="relative h-10 sm:h-11 w-36 sm:w-40 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/ieee-master.svg")}
               alt="IEEE Master"
@@ -48,7 +48,7 @@ export default function Footer() {
             />
           </div>
           <div className="h-6 w-px bg-white/20" />
-          <div className="relative h-8 sm:h-9 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
+          <div className="relative h-9 sm:h-10 w-36 sm:w-40 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/ieee-cs.svg")}
               alt="IEEE Computer Society"
@@ -58,7 +58,7 @@ export default function Footer() {
             />
           </div>
           <div className="h-6 w-px bg-white/20" />
-          <div className="relative h-8 sm:h-9 w-32 sm:w-36 opacity-95 hover:opacity-100 transition-opacity">
+          <div className="relative h-9 sm:h-10 w-36 sm:w-40 opacity-95 hover:opacity-100 transition-opacity">
             <Image
               src={getAssetPath("/assets/logos/mbits-official.png")}
               alt="MBITS Student Branch"
@@ -66,10 +66,6 @@ export default function Footer() {
               className="object-contain object-left brightness-0 invert"
               priority
             />
-          </div>
-          <div className="ml-auto hidden md:flex items-center gap-2.5 font-mono text-xs text-white/60 tracking-wider uppercase">
-            <span className="w-2 h-2 rounded-full bg-lime shadow-[0_0_8px_rgba(203,235,58,0.7)] animate-pulse" />
-            <span>MBITS Campus, Kerala · Chapter #14591</span>
           </div>
         </div>
 
@@ -280,12 +276,16 @@ export default function Footer() {
           </svg>
         </div>
 
-        {/* MINIMAL BOTTOM UTILITY BAR (No Time Clock) */}
+        {/* MINIMAL BOTTOM UTILITY BAR */}
         <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full pt-3 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-white/40 border-t border-white/5">
           <div className="flex flex-wrap items-center gap-2 text-[11px] tracking-wider uppercase">
-            <span>© 2026 IEEE CS MBITS CHAPTER #14591</span>
+            <span>© 2026 IEEE CS MBITS</span>
             <span>•</span>
             <span>ALL RIGHTS RESERVED</span>
+          </div>
+
+          <div className="text-[11px] tracking-wider uppercase text-white/50 font-mono">
+            Made by <span className="text-white hover:text-lime transition-colors duration-200 font-medium">Arshad</span>
           </div>
 
           <button
