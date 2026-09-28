@@ -244,7 +244,50 @@ class InteractiveAscii {
       this.resize();
       this.startLoop();
     };
+
+    this.img.onerror = (e) => {
+      // Build robust fallback list
+      const fallbacks = [];
+      if (src.includes('/IEEE.Webpage/IEEE.Webpage/')) {
+        fallbacks.push(src.replace('/IEEE.Webpage/IEEE.Webpage/', '/IEEE.Webpage/'));
+      }
+      if (!src.startsWith('http')) {
+        const hasBase = typeof window !== 'undefined' && window.location.pathname.startsWith('/IEEE.Webpage');
+        if (hasBase) {
+          fallbacks.push('/IEEE.Webpage/assets/acsii.jpg');
+          fallbacks.push('/IEEE.Webpage/acsii.jpg');
+        }
+        fallbacks.push('/assets/acsii.jpg');
+        fallbacks.push('/acsii.jpg');
+        fallbacks.push('./assets/acsii.jpg');
+      }
+
+      const tryNext = (idx) => {
+        if (idx >= fallbacks.length) return;
+        const fallbackSrc = fallbacks[idx];
+        if (fallbackSrc === src) {
+          tryNext(idx + 1);
+          return;
+        }
+        const fallbackImg = new Image();
+        fallbackImg.crossOrigin = 'anonymous';
+        fallbackImg.onload = () => {
+          this.img = fallbackImg;
+          this.resize();
+          this.startLoop();
+        };
+        fallbackImg.onerror = () => tryNext(idx + 1);
+        fallbackImg.src = fallbackSrc;
+      };
+
+      tryNext(0);
+    };
+
     this.img.src = src;
+    if (this.img.complete && this.img.naturalWidth > 0) {
+      this.resize();
+      this.startLoop();
+    }
   }
 
   resize() {

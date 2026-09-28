@@ -11,6 +11,17 @@ export function getAssetPath(path: string): string {
   if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
     return path;
   }
-  const cleanPath = path.startsWith("/") ? path : `/${path}`;
-  return `${basePath}${cleanPath}`;
+  let cleanPath = path.startsWith("/") ? path : `/${path}`;
+  if (basePath) {
+    const norm = basePath.startsWith("/") ? basePath : `/${basePath}`;
+    const cleanNorm = norm.replace(/^\/+/, "").replace(/\/+$/, "");
+    const regex = new RegExp(`^(/+${cleanNorm})+`, "g");
+    cleanPath = cleanPath.replace(regex, norm);
+    if (cleanPath === norm || cleanPath.startsWith(`${norm}/`)) {
+      return cleanPath;
+    }
+    return `${norm}${cleanPath}`;
+  }
+  return cleanPath;
 }
+
