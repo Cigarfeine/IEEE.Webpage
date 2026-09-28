@@ -64,16 +64,28 @@ export default function Hero() {
           "-=0.8"
         );
 
-      // Subtle parallax & fade as user scrolls into the stacked Manifesto
+      // Good-Fella style subtle, layered scroll parallax & stacked card overlap
       gsap.to(".hero-scroll-content", {
-        y: 60,
-        opacity: 0.88,
+        y: 45,
+        opacity: 0.82,
         ease: "none",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: 0.5,
+          scrub: 0.8,
+        },
+      });
+
+      gsap.to(".hero-media", {
+        y: 65,
+        scale: 0.98,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
         },
       });
     },

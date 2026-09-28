@@ -114,18 +114,18 @@ export default function Manifesto() {
         }
       );
 
-      // Subtle Image Parallax for top council photo
+      // Good-Fella style window parallax for top council photo
       gsap.fromTo(
         ".manifesto-parallax-img",
-        { yPercent: -5 },
+        { yPercent: -10 },
         {
-          yPercent: 5,
+          yPercent: 10,
           ease: "none",
           scrollTrigger: {
             trigger: ".manifesto-img-container",
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1.2,
           },
         }
       );
@@ -181,13 +181,15 @@ export default function Manifesto() {
           {/* Left Column: Media Card & Sticky Chapter Mark */}
           <div className="lg:col-span-5 flex flex-col gap-6">
             <div className="manifesto-img-container relative aspect-[4/3] rounded-2xl overflow-hidden border border-black/10 shadow-lg group">
-              <Image
-                src="/assets/gallery/fig3-committee.jpg"
-                alt="IEEE CS Executive Council"
-                fill
-                className="manifesto-parallax-img object-cover scale-105 transition-transform duration-700 group-hover:scale-110 will-change-transform"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute inset-[-10%] w-[120%] h-[120%]">
+                <Image
+                  src="/assets/gallery/fig3-committee.jpg"
+                  alt="IEEE CS Executive Council"
+                  fill
+                  className="manifesto-parallax-img object-cover scale-105 transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 text-white">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-lime block mb-1">
                   EXECUTIVE COMMITTEE
