@@ -2,6 +2,7 @@
 
 import React from "react";
 import InteractiveAsciiArt from "./InteractiveAsciiArt";
+import { getAssetPath } from "@/lib/utils";
 
 interface AsciiViewerProps {
   className?: string;
@@ -13,7 +14,7 @@ export default function AsciiViewer({ className = "" }: AsciiViewerProps) {
       className={`relative w-full flex items-center justify-end select-none ${className}`}
     >
       <InteractiveAsciiArt
-        imageSrc="/assets/acsii.jpg"
+        imageSrc={getAssetPath("/assets/acsii.jpg")}
         theme="matrix"
         hoverMode="glitch"
         columns={128}

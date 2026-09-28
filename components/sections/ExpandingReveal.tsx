@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import SectionOverlay from "@/components/ui/SectionOverlay";
 import { Shield, Zap, GitBranch, Globe, ArrowUpRight } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export default function ExpandingReveal() {
   const containerRef = useRef<HTMLElement>(null);
@@ -34,7 +35,7 @@ export default function ExpandingReveal() {
       title: "Distributed Intelligence & Architecture Lab",
       description:
         "High-concurrency hardware labs, neural accelerators, and low-latency distributed pipeline testbeds.",
-      image: "/assets/gallery/fig1-workshop.jpg",
+      image: getAssetPath("/assets/gallery/fig1-workshop.jpg"),
     },
     {
       id: "hackathon",
@@ -43,7 +44,7 @@ export default function ExpandingReveal() {
       title: "HackGenesis 48-Hour Systems Build",
       description:
         "Continuous 48-hour competitive sprint engineering production microservices, kernels, and autonomous systems.",
-      image: "/assets/gallery/fig2-hackathon.jpg",
+      image: getAssetPath("/assets/gallery/fig2-hackathon.jpg"),
     },
     {
       id: "symposium",
@@ -52,7 +53,7 @@ export default function ExpandingReveal() {
       title: "Advanced Systems & Architecture Colloquium",
       description:
         "Technical keynotes and peer reviews with leading engineers across distributed architectures and AI systems.",
-      image: "/assets/gallery/fig4-lecture.jpg",
+      image: getAssetPath("/assets/gallery/fig4-lecture.jpg"),
     },
   ];
 

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import InteractiveAscii from "./ascii-interactive.js";
 import "./ascii-interactive.css";
+import { getAssetPath } from "@/lib/utils";
 
 export interface InteractiveAsciiArtProps {
   imageSrc?: string;
@@ -16,7 +17,7 @@ export interface InteractiveAsciiArtProps {
 }
 
 export default function InteractiveAsciiArt({
-  imageSrc = "/assets/acsii.jpg",
+  imageSrc: propImageSrc,
   theme = "matrix",
   hoverMode = "glitch",
   columns = 110,
@@ -25,6 +26,7 @@ export default function InteractiveAsciiArt({
   className = "",
   style = {},
 }: InteractiveAsciiArtProps) {
+  const imageSrc = getAssetPath(propImageSrc || "/assets/acsii.jpg");
   const containerRef = useRef<HTMLDivElement>(null);
   const asciiInstanceRef = useRef<any>(null);
 

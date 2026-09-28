@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { getAssetPath } from "@/lib/utils";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -89,13 +90,13 @@ export default function Navbar() {
               aria-label="IEEE Computer Society Home"
             >
               <img
-                src="/assets/logos/ieee-cs.svg"
+                src={getAssetPath("/assets/logos/ieee-cs.svg")}
                 alt="IEEE Computer Society"
                 className="h-7 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
               <div className="h-4 sm:h-6 w-[1.5px] bg-white/20" />
               <img
-                src="/assets/logos/mbits-official.png"
+                src={getAssetPath("/assets/logos/mbits-official.png")}
                 alt="MBITS"
                 className="h-6 sm:h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
               />
@@ -247,7 +248,7 @@ export default function Navbar() {
           <div className="lg:col-span-5 hidden lg:grid grid-cols-2 gap-6">
             <div className="group relative aspect-[3/4] rounded-lg overflow-hidden border border-white/10 bg-black/40">
               <Image
-                src="/assets/gallery/fig3-committee.jpg"
+                src={getAssetPath("/assets/gallery/fig3-committee.jpg")}
                 alt="Executive Council"
                 fill
                 sizes="300px"
@@ -266,7 +267,7 @@ export default function Navbar() {
 
             <div className="group relative aspect-[3/4] rounded-lg overflow-hidden border border-white/10 bg-black/40">
               <Image
-                src="/assets/gallery/fig4-lecture.jpg"
+                src={getAssetPath("/assets/gallery/fig4-lecture.jpg")}
                 alt="Featured Initiative"
                 fill
                 sizes="300px"

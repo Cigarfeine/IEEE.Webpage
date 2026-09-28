@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Globe } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export default function Footer() {
   const [time, setTime] = useState("");
@@ -44,7 +45,7 @@ export default function Footer() {
             <div className="flex flex-wrap items-center gap-6">
               <div className="relative h-10 w-28 opacity-80 hover:opacity-100 transition-opacity">
                 <Image
-                  src="/assets/logos/ieee-master.svg"
+                  src={getAssetPath("/assets/logos/ieee-master.svg")}
                   alt="IEEE Master"
                   fill
                   className="object-contain object-left"
@@ -53,7 +54,7 @@ export default function Footer() {
               <div className="h-6 w-px bg-white/10" />
               <div className="relative h-9 w-28 opacity-80 hover:opacity-100 transition-opacity">
                 <Image
-                  src="/assets/logos/ieee-cs.svg"
+                  src={getAssetPath("/assets/logos/ieee-cs.svg")}
                   alt="IEEE Computer Society"
                   fill
                   className="object-contain object-left"
@@ -62,7 +63,7 @@ export default function Footer() {
               <div className="h-6 w-px bg-white/10" />
               <div className="relative h-9 w-28 opacity-80 hover:opacity-100 transition-opacity">
                 <Image
-                  src="/assets/logos/mbits-official.png"
+                  src={getAssetPath("/assets/logos/mbits-official.png")}
                   alt="MBITS Student Branch"
                   fill
                   className="object-contain object-left brightness-0 invert"

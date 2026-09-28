@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { getAssetPath } from "@/lib/utils";
 
 export default function VelocityMarquee() {
   const marqueeRef = useRef<HTMLDivElement>(null);
@@ -73,7 +74,7 @@ export default function VelocityMarquee() {
                 {idx % 2 === 0 ? (
                   <div className="relative w-12 h-8 rounded-full overflow-hidden border border-lime/40 shrink-0">
                     <Image
-                      src="/assets/gallery/fig1-workshop.jpg"
+                      src={getAssetPath("/assets/gallery/fig1-workshop.jpg")}
                       alt="Chapter snapshot"
                       fill
                       className="object-cover"

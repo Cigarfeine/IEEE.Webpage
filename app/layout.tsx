@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Syne, Instrument_Serif, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import { getAssetPath } from "@/lib/utils";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
   description:
     "MBITS IEEE Computer Society Student Branch Chapter. Engineering production-grade machine intelligence, distributed systems, and open-source computing architecture.",
   icons: {
-    icon: "/assets/logos/ieee-cs-dark.png",
+    icon: getAssetPath("/assets/logos/ieee-cs-dark.png"),
   },
 };
 

@@ -7,6 +7,7 @@ import SectionOverlay from "@/components/ui/SectionOverlay";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { getAssetPath } from "@/lib/utils";
 
 interface WorkProject {
   id: string;
@@ -30,7 +31,7 @@ export default function FlagshipWorks() {
       title: "KRAKEN EBPF KERNEL",
       discipline: "Systems Kernel · C / Rust",
       year: "2026",
-      image: "/assets/gallery/fig4-lecture.jpg",
+      image: getAssetPath("/assets/gallery/fig4-lecture.jpg"),
       desc: "Low-overhead Linux kernel observability instrumentation and high-throughput network packet telemetry.",
       link: "#join",
     },
@@ -39,7 +40,7 @@ export default function FlagshipWorks() {
       title: "NEURAL ACCELERATOR",
       discipline: "Neural Engine · PyTorch / CUDA",
       year: "2025",
-      image: "/assets/gallery/fig1-workshop.jpg",
+      image: getAssetPath("/assets/gallery/fig1-workshop.jpg"),
       desc: "Distributed transformer inference engine with 4-bit INT4 quantization and custom flash-attention kernels.",
       link: "#join",
     },
@@ -48,7 +49,7 @@ export default function FlagshipWorks() {
       title: "HACKGENESIS 48H",
       discipline: "Distributed Systems · Next.js / Go",
       year: "2025",
-      image: "/assets/gallery/fig2-hackathon.jpg",
+      image: getAssetPath("/assets/gallery/fig2-hackathon.jpg"),
       desc: "48-hour continuous software sprint deploying 40+ concurrent real-time microservices across 200+ engineers.",
       link: "#join",
     },
@@ -57,7 +58,7 @@ export default function FlagshipWorks() {
       title: "DISTRIBUTED CONSENSUS RAFT",
       discipline: "Consensus Engine · Rust",
       year: "2024",
-      image: "/assets/gallery/fig3-committee.jpg",
+      image: getAssetPath("/assets/gallery/fig3-committee.jpg"),
       desc: "Byzantine-resilient distributed state replication engine with sub-5ms heartbeat failover and formal verification.",
       link: "#join",
     },

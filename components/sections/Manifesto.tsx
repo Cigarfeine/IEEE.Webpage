@@ -7,6 +7,7 @@ import SectionOverlay from "@/components/ui/SectionOverlay";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { getAssetPath } from "@/lib/utils";
 
 interface PillarItem {
   idx: string;
@@ -27,25 +28,25 @@ export default function Manifesto() {
       idx: "01",
       title: "Systems Architecture.",
       desc: "Distributed systems, low-latency microservices, and Linux kernel telemetry designed for mission-critical reliability.",
-      image: "/assets/gallery/fig4-lecture.jpg",
+      image: getAssetPath("/assets/gallery/fig4-lecture.jpg"),
     },
     {
       idx: "02",
       title: "Machine Intelligence.",
       desc: "Deep neural networks, high-throughput transformer pipelines, and edge TPU deployment frameworks running inference at scale.",
-      image: "/assets/gallery/fig1-workshop.jpg",
+      image: getAssetPath("/assets/gallery/fig1-workshop.jpg"),
     },
     {
       idx: "03",
       title: "Cyber-Physical Security.",
       desc: "Hardened kernel protocols, zero-trust cryptographic primitives, and resilient cyber-defense architectures tested in the wild.",
-      image: "/assets/gallery/fig2-hackathon.jpg",
+      image: getAssetPath("/assets/gallery/fig2-hackathon.jpg"),
     },
     {
       idx: "04",
       title: "Global Fellowship.",
       desc: "Direct integration with global IEEE Computer Society chapters, indexed research publications, and international symposiums.",
-      image: "/assets/gallery/fig3-committee.jpg",
+      image: getAssetPath("/assets/gallery/fig3-committee.jpg"),
     },
   ];
 
@@ -177,7 +178,7 @@ export default function Manifesto() {
             <div className="manifesto-img-container relative aspect-[4/3] rounded-2xl overflow-hidden border border-black/10 shadow-lg group">
               <div className="absolute inset-[-10%] w-[120%] h-[120%]">
                 <Image
-                  src="/assets/gallery/fig3-committee.jpg"
+                  src={getAssetPath("/assets/gallery/fig3-committee.jpg")}
                   alt="IEEE CS Executive Council"
                   fill
                   className="manifesto-parallax-img object-cover scale-105 transition-transform duration-700 group-hover:scale-110 will-change-transform"
