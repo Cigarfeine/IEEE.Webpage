@@ -233,14 +233,17 @@ export default function DualAsciiHands({
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
     // Scroll Convergence Scrub (GSAP)
+    const footerParent = container.closest("footer") || container;
+    let scrollProgress = 0;
     const st = ScrollTrigger.create({
-      trigger: container,
-      start: "top 95%",
+      trigger: footerParent,
+      start: "top bottom",
       end: "bottom bottom",
-      scrub: 1.2,
+      scrub: 1.0,
       onUpdate: (self) => {
-        // Hands subtly glide inward from outer edges as user scrolls to footer
-        convergenceOffset = (1 - self.progress) * 45;
+        scrollProgress = self.progress;
+        // Hands glide inward from 75px outer separation to 0 at the bottom
+        convergenceOffset = (1 - self.progress) * 75;
       },
     });
 
@@ -296,15 +299,16 @@ export default function DualAsciiHands({
           }
         }
 
-        // Render glyph in signature lime
+        // Render glyph in signature lime with scroll-linked enter fade
+        const enterAlpha = Math.min(1, Math.max(0.3, 0.3 + scrollProgress * 0.7));
         const isGlitching = p.scrambleTimer > 0;
         if (isGlitching) {
           ctx.fillStyle = LIME_PALETTE.highlight;
-          ctx.globalAlpha = 1.0;
+          ctx.globalAlpha = enterAlpha;
           ctx.fillText(p.scrambleChar, p.x, p.y);
         } else {
           ctx.fillStyle = LIME_PALETTE.ramp(p.brightness);
-          ctx.globalAlpha = Math.max(0.2, p.brightness);
+          ctx.globalAlpha = Math.max(0.2, p.brightness) * enterAlpha;
           ctx.fillText(p.char, p.x, p.y);
         }
       }
@@ -327,12 +331,12 @@ export default function DualAsciiHands({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-full flex items-center justify-center overflow-hidden select-none ${className}`}
+      className={`relative w-full h-full min-h-0 flex items-center justify-center overflow-hidden select-none ${className}`}
     >
       {/* The Dual ASCII Hands Canvas */}
       <canvas
         ref={canvasRef}
-        className="relative z-10 w-full h-full block cursor-crosshair"
+        className="absolute inset-0 w-full h-full block cursor-crosshair z-10"
         style={{ touchAction: "none" }}
       />
 

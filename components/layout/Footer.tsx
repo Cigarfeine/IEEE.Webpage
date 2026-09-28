@@ -1,16 +1,85 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUp, Check, Globe } from "lucide-react";
 import DualAsciiHands from "@/components/ui/DualAsciiHands";
 import { getAssetPath } from "@/lib/utils";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 export default function Footer() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const footerRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+  const topTierRef = useRef<HTMLDivElement>(null);
+  const watermarkRef = useRef<HTMLDivElement>(null);
+  const bottomBarRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const footer = footerRef.current;
+      const inner = innerRef.current;
+      if (!footer || !inner) return;
+
+      // Master Good-Fella Parallax Scroll Timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footer,
+          start: "top bottom",     // when footer breaches bottom of viewport
+          end: "bottom bottom",    // when footer reaches full view
+          scrub: 1.0,              // 1s lag-smoothing matching Lenis
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // 1. Overall curtain counter-parallax on inner wrapper (-20% to 0)
+      tl.fromTo(
+        inner,
+        { yPercent: -20, opacity: 0.25 },
+        { yPercent: 0, opacity: 1, ease: "none" },
+        0
+      );
+
+      // 2. Differential depth on top tier (brand triad & directory links)
+      if (topTierRef.current) {
+        tl.fromTo(
+          topTierRef.current,
+          { y: -35, opacity: 0.3 },
+          { y: 0, opacity: 1, ease: "none" },
+          0
+        );
+      }
+
+      // 3. Multi-plane differential parallax on large typography watermark
+      if (watermarkRef.current) {
+        tl.fromTo(
+          watermarkRef.current,
+          { yPercent: -32, opacity: 0.02, scale: 0.98 },
+          { yPercent: 0, opacity: 0.08, scale: 1, ease: "none" },
+          0
+        );
+      }
+
+      // 4. Subtle settle on bottom utility bar
+      if (bottomBarRef.current) {
+        tl.fromTo(
+          bottomBarRef.current,
+          { y: 15, opacity: 0.4 },
+          { y: 0, opacity: 1, ease: "none" },
+          0.2
+        );
+      }
+    },
+    { scope: footerRef }
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,10 +100,20 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative min-h-[100dvh] lg:h-[100dvh] bg-obsidian-pure text-white overflow-hidden select-none flex flex-col justify-between pt-6 sm:pt-8 pb-3 border-t border-white/10">
-      
-      {/* TOP TIER: Brand Triad + Editorial 3-Column Directory */}
-      <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full flex-none">
+    <footer
+      ref={footerRef}
+      className="relative z-0 min-h-[100dvh] lg:h-[100dvh] bg-obsidian-pure text-white overflow-hidden select-none flex flex-col justify-between pt-20 sm:pt-24 lg:pt-22 pb-2 border-t border-white/10"
+    >
+      {/* Good-Fella Parallax Inner Wrapper */}
+      <div
+        ref={innerRef}
+        className="footer-parallax-inner w-full h-full min-h-0 flex flex-col justify-between will-change-transform flex-1"
+      >
+        {/* TOP TIER: Brand Triad + Editorial 3-Column Directory */}
+        <div
+          ref={topTierRef}
+          className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full flex-none"
+        >
         
         {/* ENLARGED & BALANCED BRAND TRIAD LOGOS */}
         <div className="flex flex-wrap items-center gap-6 sm:gap-8 pb-6 border-b border-white/10">
@@ -241,7 +320,7 @@ export default function Footer() {
       </div>
 
       {/* MIDDLE TIER: DUAL CONVERGING ASCII HANDS STAGE */}
-      <div className="w-full flex-1 min-h-[170px] sm:min-h-[220px] relative flex items-center justify-center my-1 overflow-hidden">
+      <div className="w-full h-[220px] sm:h-[260px] lg:h-auto lg:flex-1 min-h-0 relative flex items-center justify-center my-0 overflow-hidden">
         <DualAsciiHands
           leftHandSrc="/assets/hands/lefthand.png"
           rightHandSrc="/assets/hands/righthand.png"
@@ -251,8 +330,11 @@ export default function Footer() {
       {/* BOTTOM TIER: Full-Width Typographic Watermark + Minimal Utility Bar */}
       <div className="w-full flex-none flex flex-col mt-auto">
         
-        {/* Large Typographic Watermark (100% Vector Visible Edge-to-Edge) */}
-        <div className="w-full overflow-hidden pointer-events-none select-none px-2 sm:px-4">
+        {/* Large Typographic Watermark (100% Vector Visible Edge-to-Edge with Parallax) */}
+        <div
+          ref={watermarkRef}
+          className="w-full overflow-hidden pointer-events-none select-none px-2 sm:px-4 will-change-transform"
+        >
           <svg
             viewBox="0 0 1600 130"
             fill="none"
@@ -277,7 +359,10 @@ export default function Footer() {
         </div>
 
         {/* MINIMAL BOTTOM UTILITY BAR */}
-        <div className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full pt-3 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-white/40 border-t border-white/5">
+        <div
+          ref={bottomBarRef}
+          className="max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 w-full pt-3 pb-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-white/40 border-t border-white/5 will-change-transform"
+        >
           <div className="flex flex-wrap items-center gap-2 text-[11px] tracking-wider uppercase">
             <span>© 2026 IEEE CS MBITS</span>
             <span>•</span>
@@ -292,6 +377,7 @@ export default function Footer() {
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>
+      </div>
       </div>
 
     </footer>
