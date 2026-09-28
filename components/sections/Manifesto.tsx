@@ -256,7 +256,7 @@ export default function Manifesto() {
            ========================================================================= */}
         <div
           ref={pinRef}
-          className="relative min-h-[300vh] lg:min-h-[320vh] mt-24 pt-16 border-t border-black/10"
+          className="relative lg:min-h-[320vh] mt-24 pt-16 border-t border-black/10"
         >
           {/* Sticky Viewport Stage for Desktop */}
           <div className="sticky top-0 h-screen hidden lg:flex flex-col justify-center">
