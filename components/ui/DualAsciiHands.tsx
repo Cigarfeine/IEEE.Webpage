@@ -137,13 +137,13 @@ export default function DualAsciiHands({
       const leftAspect = leftImg.height / leftImg.width;
       const leftW = Math.round(cols * leftHandRatio);
       const leftH = Math.round((leftW * leftAspect) / fontAspect);
-      const leftY = Math.round((rows - leftH) * (isMobile ? 0.44 : 0.48));
+      const leftY = Math.round((rows - leftH) * 0.5);
 
       const rightAspect = rightImg.height / rightImg.width;
       const rightW = Math.round(cols * rightHandRatio);
       const rightH = Math.round((rightW * rightAspect) / fontAspect);
       const rightX = cols - rightW;
-      const rightY = Math.round((rows - rightH) * (isMobile ? 0.48 : 0.52));
+      const rightY = Math.round((rows - rightH) * 0.5);
 
       // Draw hands into sample canvas with corrected proportions
       sampleCtx.drawImage(leftImg, 0, leftY, leftW, leftH);
@@ -327,18 +327,8 @@ export default function DualAsciiHands({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-[440px] sm:h-[500px] md:h-[560px] lg:h-[620px] flex items-center justify-center overflow-hidden select-none ${className}`}
+      className={`relative w-full h-full flex items-center justify-center overflow-hidden select-none ${className}`}
     >
-      {/* Giant Watermark Typography Submerged in Background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 top-auto flex items-end justify-center pointer-events-none select-none overflow-hidden z-0"
-      >
-        <span className="font-display font-black uppercase text-[15vw] sm:text-[14vw] md:text-[13vw] tracking-tighter text-white/[0.04] leading-[0.76] translate-y-[16%] whitespace-nowrap">
-          IEEE Computer Society
-        </span>
-      </div>
-
       {/* The Dual ASCII Hands Canvas */}
       <canvas
         ref={canvasRef}
