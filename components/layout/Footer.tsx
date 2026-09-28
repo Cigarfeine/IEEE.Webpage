@@ -284,10 +284,6 @@ export default function Footer() {
             <span>ALL RIGHTS RESERVED</span>
           </div>
 
-          <div className="text-[11px] tracking-wider uppercase text-white/50 font-mono">
-            Made by <span className="text-white hover:text-lime transition-colors duration-200 font-medium">Arshad</span>
-          </div>
-
           <button
             onClick={scrollToTop}
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-lime hover:text-lime transition-all duration-300 cursor-pointer text-xs"
