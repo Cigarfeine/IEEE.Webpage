@@ -79,62 +79,62 @@ export default function Navbar() {
             : "pt-6 sm:pt-8 pb-4 bg-transparent border-b border-transparent"
         }`}
       >
-        <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-3 items-center">
+        <div className="max-w-[1600px] mx-auto px-4 sm:px-10 lg:px-16 grid grid-cols-2 lg:grid-cols-3 items-center">
           
-          {/* COLUMN 1 (LEFT): Minimal Clean Logos */}
+          {/* COLUMN 1 (LEFT): Clean Logos (Scaled and Responsive) */}
           <div className="justify-self-start">
             <Link
               href="/"
-              className="flex items-center gap-3.5 group transition-opacity duration-300 hover:opacity-75"
+              className="flex items-center gap-2.5 sm:gap-4 md:gap-5 group transition-opacity duration-300 hover:opacity-75"
               aria-label="IEEE Computer Society Home"
             >
               <img
                 src="/assets/logos/ieee-cs.svg"
                 alt="IEEE Computer Society"
-                className="h-6 sm:h-7 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-7 sm:h-9 md:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <div className="h-4 w-px bg-white/20" />
+              <div className="h-4 sm:h-6 w-[1.5px] bg-white/20" />
               <img
                 src="/assets/logos/mbits-official.png"
                 alt="MBITS"
-                className="h-5 sm:h-6 w-auto object-contain brightness-0 invert opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-6 sm:h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 transition-transform duration-300 group-hover:scale-[1.02]"
               />
             </Link>
           </div>
 
-          {/* COLUMN 2 (CENTER on desktop, RIGHT on mobile): Good-Fella Menu Toggle */}
+          {/* COLUMN 2 (CENTER on desktop, RIGHT on mobile): Good-Fella Menu Toggle (Bigger & Crisp) */}
           <div className="justify-self-end lg:justify-self-center">
             <button
               type="button"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
-              className="group flex cursor-pointer items-center gap-3 transition-opacity duration-300 hover:opacity-75 text-white uppercase tracking-tight text-xs font-mono select-none"
+              className="group flex cursor-pointer items-center gap-2.5 sm:gap-3.5 transition-opacity duration-300 hover:opacity-75 text-white uppercase tracking-wider text-xs sm:text-base font-mono font-medium select-none"
             >
               {/* Rolling Dual Text */}
-              <span className="relative h-[1.15em] w-[3.5em] overflow-hidden leading-none text-left">
+              <span className="relative h-[1.25em] w-[3.8em] sm:w-[4.4em] overflow-hidden leading-none text-left">
                 <span
                   className="flex flex-col gap-1 transition-transform duration-300 ease-out"
                   style={{
-                    transform: menuOpen ? "translateY(calc(-1.15em - 4px))" : "translateY(0px)",
+                    transform: menuOpen ? "translateY(calc(-1.25em - 4px))" : "translateY(0px)",
                   }}
                 >
-                  <span className="block h-[1.15em] leading-none">Menu</span>
-                  <span className="block h-[1.15em] leading-none text-lime font-bold">Close</span>
+                  <span className="flex items-center h-[1.25em] leading-none">Menu</span>
+                  <span className="flex items-center h-[1.25em] leading-none text-lime font-bold">Close</span>
                 </span>
               </span>
 
               {/* Good-Fella 2-Line Morphing Icon */}
-              <span className="relative flex h-4 w-4 flex-col items-center justify-center">
+              <span className="relative flex shrink-0 h-4 w-4 sm:h-5 sm:w-5 flex-col items-center justify-center">
                 <span
-                  className="absolute h-[1.5px] w-full origin-center transition-all duration-300 ease-out"
+                  className="absolute h-[1.5px] sm:h-[2px] w-full origin-center transition-all duration-300 ease-out"
                   style={{
                     transform: menuOpen ? "rotate(45deg) translateY(0px)" : "rotate(0deg) translateY(-3px)",
                     backgroundColor: menuOpen ? "#CBEB3A" : "currentColor",
                   }}
                 />
                 <span
-                  className="absolute h-[1.5px] w-full origin-center transition-all duration-300 ease-out"
+                  className="absolute h-[1.5px] sm:h-[2px] w-full origin-center transition-all duration-300 ease-out"
                   style={{
                     transform: menuOpen ? "rotate(-45deg) translateY(0px)" : "rotate(0deg) translateY(3px)",
                     backgroundColor: menuOpen ? "#CBEB3A" : "currentColor",
@@ -148,14 +148,14 @@ export default function Navbar() {
           <div className="justify-self-end hidden lg:inline-flex">
             <a
               href="#join"
-              className="group min-w-0 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap font-mono text-xs uppercase tracking-wider inline-flex transition-all duration-300"
+              className="group min-w-0 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap font-mono text-xs sm:text-sm uppercase tracking-wider inline-flex transition-all duration-300"
             >
               <span className="relative flex items-center">
-                <span className="flex items-center justify-center h-9 px-5 bg-lime text-black font-semibold rounded-sm transition-all duration-300 group-hover:bg-lime/90 group-hover:shadow-[0_0_20px_rgba(203,235,58,0.3)]">
+                <span className="flex items-center justify-center h-10 sm:h-11 px-5 sm:px-6 bg-lime text-black font-semibold rounded-sm transition-all duration-300 group-hover:bg-lime/90 group-hover:shadow-[0_0_20px_rgba(203,235,58,0.3)]">
                   <span>Join chapter</span>
                 </span>
-                <span className="flex items-center justify-center w-9 h-9 ml-1 bg-lime text-black rounded-sm transition-all duration-300 group-hover:bg-lime/90">
-                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <span className="flex items-center justify-center w-10 sm:w-11 h-10 sm:h-11 ml-1 bg-lime text-black rounded-sm transition-all duration-300 group-hover:bg-lime/90">
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </span>
             </a>
@@ -168,7 +168,7 @@ export default function Navbar() {
           GOOD-FELLA CURTAIN DRAWER (Opens Below Intact Header)
          ========================================================================= */}
       <div
-        className={`fixed inset-x-0 top-0 z-[90] bg-[#0a0d12]/98 backdrop-blur-3xl pt-24 sm:pt-28 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border-b border-white/10 overflow-y-auto max-h-screen ${
+        className={`fixed inset-x-0 top-0 z-[90] bg-[#0a0d12]/98 backdrop-blur-3xl pt-28 sm:pt-32 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border-b border-white/10 overflow-y-auto max-h-screen ${
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-8"
