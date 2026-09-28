@@ -55,7 +55,7 @@ export default function VelocityMarquee() {
   return (
     <div
       ref={marqueeRef}
-      className="relative py-8 md:py-12 bg-obsidian-surface border-y border-white/10 overflow-hidden select-none z-10"
+      className="relative py-8 md:py-12 bg-obsidian-surface border-y border-white/10 overflow-hidden select-none z-10 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]"
     >
       <div
         ref={trackRef}

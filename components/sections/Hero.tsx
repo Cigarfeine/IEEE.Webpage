@@ -52,30 +52,70 @@ export default function Hero() {
           "-=0.8"
         );
 
-      // Good-Fella style layered scroll parallax
-      gsap.to(".hero-scroll-content", {
-        y: 45,
-        opacity: 0.85,
-        ease: "none",
+      // Signature Good-Fella Multi-Plane Scroll Parallax
+      const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: 0.8,
+          scrub: 1.0,
+          invalidateOnRefresh: true,
         },
       });
 
-      gsap.to(".hero-media", {
-        y: 65,
-        scale: 0.98,
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.2,
+      // 1. Overall Hero Content Counter-Descent (translates down as viewport scrolls up, matching good-fella translate(0%, 35%))
+      scrollTl.to(
+        ".hero-scroll-content",
+        {
+          yPercent: 32,
+          ease: "none",
         },
-      });
+        0
+      );
+
+      // 2. Left Typographic Column: Gentle float + gradual fade-out
+      scrollTl.to(
+        ".hero-text-col",
+        {
+          yPercent: 8,
+          opacity: 0.25,
+          ease: "none",
+        },
+        0
+      );
+
+      // 3. Right 3D ASCII Media: Differential spatial depth drift & scale
+      scrollTl.to(
+        ".hero-media",
+        {
+          yPercent: 18,
+          scale: 0.92,
+          opacity: 0.35,
+          ease: "none",
+        },
+        0
+      );
+
+      // 4. Background Sonar Matrix: Slower anchored drift for multi-plane parallax depth
+      scrollTl.to(
+        "canvas[aria-hidden='true']",
+        {
+          yPercent: 12,
+          ease: "none",
+        },
+        0
+      );
+
+      // 5. Radial Glow Wash: Synchronized soft drift
+      scrollTl.to(
+        ".hero-radial-glow",
+        {
+          yPercent: 15,
+          opacity: 0.4,
+          ease: "none",
+        },
+        0
+      );
     },
     { scope: containerRef }
   );
@@ -107,7 +147,7 @@ export default function Hero() {
         {/* Soft radial backdrop wash to ensure extreme typographic contrast */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_65%_55%_at_35%_45%,rgba(11,15,14,0.85)_0%,transparent_100%)]"
+          className="hero-radial-glow pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_65%_55%_at_35%_45%,rgba(11,15,14,0.85)_0%,transparent_100%)] will-change-transform"
         />
 
         <div className="hero-scroll-content max-w-[1560px] 2xl:max-w-[1720px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 w-full flex-1 flex flex-col justify-center relative z-10 will-change-transform">
@@ -116,7 +156,7 @@ export default function Hero() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
             
             {/* Left Column: Quiet, Powerful Headline & Clean CTAs */}
-            <div className="lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex flex-col justify-center">
+            <div className="hero-text-col lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex flex-col justify-center will-change-transform">
               <h1
                 ref={headlineRef}
                 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[4.25rem] xl:text-[5rem] leading-[0.97] tracking-tight text-white mb-6 select-none"
@@ -159,7 +199,7 @@ export default function Hero() {
             </div>
 
             {/* Right Column: Interactive ASCII Veiled Statue with breathing room */}
-            <div className="hero-media lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex items-center justify-end w-full lg:translate-x-3 xl:translate-x-6 2xl:translate-x-8">
+            <div className="hero-media lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex items-center justify-end w-full lg:translate-x-3 xl:translate-x-6 2xl:translate-x-8 will-change-transform">
               <div className="w-full max-w-[540px] sm:max-w-[620px] lg:max-w-[720px] xl:max-w-[820px] 2xl:max-w-[900px] flex justify-end ml-auto">
                 <AsciiViewer />
               </div>

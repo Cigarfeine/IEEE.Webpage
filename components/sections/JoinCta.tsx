@@ -27,7 +27,7 @@ export default function JoinCta() {
   };
 
   return (
-    <section id="join" className="py-24 sm:py-32 bg-obsidian text-white border-t border-white/10 relative z-10 overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
+    <section id="join" className="py-24 sm:py-32 bg-obsidian text-white relative z-10 overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
       {/* Background glow elements */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-petrol/20 rounded-full blur-[160px] pointer-events-none" />
 
