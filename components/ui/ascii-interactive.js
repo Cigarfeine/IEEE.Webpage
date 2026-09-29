@@ -279,8 +279,10 @@ class InteractiveAscii {
         const hasBase = typeof window !== 'undefined' && window.location.pathname.startsWith('/IEEE.Webpage');
         if (hasBase) {
           fallbacks.push('/IEEE.Webpage/assets/acsii.jpg');
+          fallbacks.push('/IEEE.Webpage/acsii.jpg');
         }
         fallbacks.push('/assets/acsii.jpg');
+        fallbacks.push('/acsii.jpg');
         fallbacks.push('./assets/acsii.jpg');
       }
 
