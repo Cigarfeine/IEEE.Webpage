@@ -10,3 +10,7 @@ build/
 .impeccable/
 .DS_Store
 CONV_ACSII/
+*.md
+.vscode/
+.idea/
+*.tsbuildinfo
