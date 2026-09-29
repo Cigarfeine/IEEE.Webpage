@@ -15,175 +15,156 @@ export default function ExpandingReveal() {
   const stageWrapRef = useRef<HTMLDivElement>(null);
   const portalRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
-  const compactOverlayRef = useRef<HTMLDivElement>(null);
   const expandedHudRef = useRef<HTMLDivElement>(null);
-  const topTextRef = useRef<HTMLDivElement>(null);
-  const bottomTextRef = useRef<HTMLDivElement>(null);
-  const leftTextRef = useRef<HTMLSpanElement>(null);
-  const rightTextRef = useRef<HTMLSpanElement>(null);
-  const mobileTopTextRef = useRef<HTMLDivElement>(null);
-  const mobileBottomTextRef = useRef<HTMLDivElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const part1Ref = useRef<HTMLDivElement>(null);
+  const part2Ref = useRef<HTMLDivElement>(null);
+  const part3Ref = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
 
       const card = portalRef.current;
-      if (!card || !triggerRef.current) return;
+      const trigger = triggerRef.current;
+      if (!card || !trigger) return;
 
-      // Calculate initial responsive pill clip percentages (100% matched to resting gap)
-      const getPillGeometry = () => {
-        const cardRect = card.getBoundingClientRect();
-        const isMobile = window.innerWidth < 640;
-        const isTablet = window.innerWidth < 1024;
-        const pillWidth = isMobile ? 70 : isTablet ? 100 : 124;
-        const pillHeight = isMobile ? 26 : isTablet ? 34 : 40;
-
-        const h = cardRect.height || 480;
-        const w = cardRect.width || 1000;
-
-        const clipY = Math.max(0, ((h - pillHeight) / 2 / h) * 100);
-        const clipX = Math.max(0, ((w - pillWidth) / 2 / w) * 100);
-
-        return { clipY, clipX };
+      // Numerical proxy for GPU-accelerated aperture expansion
+      // Starts as a sleek center letterbox slit, slowly expands to full 16:9 canvas
+      const clipProxy = {
+        y: 44,
+        x: 36,
+        scale: 0.86,
+        opacity: 0,
       };
 
-      const geo = getPillGeometry();
-      const clipProxy = { y: geo.clipY, x: geo.clipX };
+      const updateCardStyles = () => {
+        card.style.clipPath = `inset(${clipProxy.y.toFixed(2)}% ${clipProxy.x.toFixed(2)}% round 24px)`;
+        card.style.transform = `translate(-50%, -50%) scale(${clipProxy.scale.toFixed(3)})`;
+        card.style.opacity = `${clipProxy.opacity.toFixed(3)}`;
+        card.style.visibility = clipProxy.opacity > 0.01 ? "visible" : "hidden";
+      };
 
-      // Set initial pill clipping
-      card.style.clipPath = `inset(${clipProxy.y.toFixed(2)}% ${clipProxy.x.toFixed(2)}% round 20px)`;
+      // Set initial styles
+      updateCardStyles();
 
       // Pinned Cinematic Expanding Portal Timeline (100% GPU Compositor Accelerated)
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: triggerRef.current,
+          trigger: trigger,
           start: "center center",
-          end: "+=120%",
+          end: "+=220%",
           pin: true,
-          scrub: 1,
+          scrub: 1.2,
           anticipatePin: 1,
           invalidateOnRefresh: true,
-          onRefresh: () => {
-            const updated = getPillGeometry();
-            clipProxy.y = updated.clipY;
-            clipProxy.x = updated.clipX;
-            card.style.clipPath = `inset(${clipProxy.y.toFixed(2)}% ${clipProxy.x.toFixed(2)}% round 20px)`;
-          },
+          onRefresh: updateCardStyles,
         },
       });
 
-      // 1. Text Dissolves & Outward Motion (Clean minimal dissipation)
-      tl.to(
-        [topTextRef.current, mobileTopTextRef.current],
-        {
-          y: -35,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
+      // Hook continuous updates to ensure card styles stay 100% synchronized on every scrub tick
+      tl.eventCallback("onUpdate", updateCardStyles);
+
+      // Explicit initial timeline state: card is strictly hidden during text illumination
+      tl.set(clipProxy, { opacity: 0, y: 44, x: 36, scale: 0.86 }, 0);
+
+      // PHASE 1: Sequential Text Illumination (Part by Part)
+      // Words scrub into brilliant white line-by-line as user scrolls down
+      tl.fromTo(
+        part1Ref.current,
+        { opacity: 0.22, y: 18 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power1.out" },
         0
       )
-        .to(
-          [bottomTextRef.current, mobileBottomTextRef.current],
-          {
-            y: 35,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          0
+        .fromTo(
+          part2Ref.current,
+          { opacity: 0.22, y: 18 },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power1.out" },
+          0.35
         )
-        .to(
-          leftTextRef.current,
-          {
-            x: -50,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          0
+        .fromTo(
+          part3Ref.current,
+          { opacity: 0.22, y: 18 },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power1.out" },
+          0.70
         )
-        .to(
-          rightTextRef.current,
-          {
-            x: 50,
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
-          badgeRef.current,
-          {
-            opacity: 0,
-            y: -15,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
+        .fromTo(
           subtitleRef.current,
-          {
-            opacity: 0,
-            y: 15,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          0
-        )
-        .to(
-          compactOverlayRef.current,
-          {
-            opacity: 0,
-            duration: 0.25,
-            ease: "power1.out",
-          },
-          0
+          { opacity: 0.2, y: 14 },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power1.out" },
+          0.70
         )
 
-        // 2. Buttery Smooth Hardware-Accelerated Aperture Expansion via Numerical Proxy
+        // PHASE 2: Savor the Full Typographic Statement (Hold from 1.05 to 1.45)
+
+        // PHASE 3: Text Graceful Dispersal & Outward Translation
         .to(
+          part1Ref.current,
+          { y: -65, opacity: 0, duration: 0.55, ease: "power2.in" },
+          1.45
+        )
+        .to(
+          part3Ref.current,
+          { y: 65, opacity: 0, duration: 0.55, ease: "power2.in" },
+          1.45
+        )
+        .to(
+          part2Ref.current,
+          { scale: 1.05, opacity: 0, duration: 0.5, ease: "power2.in" },
+          1.50
+        )
+        .to(
+          [badgeRef.current, subtitleRef.current],
+          { opacity: 0, y: -12, duration: 0.4, ease: "power2.in" },
+          1.45
+        )
+
+        // PHASE 4: Aperture Ignites & Slowly Animates Open
+        // Card fades in from opacity 0 strictly as text disperses
+        .fromTo(
           clipProxy,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.35,
+            ease: "power1.out",
+          },
+          1.55
+        )
+        // Slow, majestic expansion from center slit to full 16:9 canvas
+        .fromTo(
+          clipProxy,
+          { y: 44, x: 36, scale: 0.86 },
           {
             y: 0,
             x: 0,
-            duration: 1.2,
+            scale: 1,
+            duration: 1.5,
             ease: "power2.inOut",
-            onUpdate: () => {
-              card.style.clipPath = `inset(${clipProxy.y.toFixed(2)}% ${clipProxy.x.toFixed(2)}% round 20px)`;
-            },
           },
-          0
+          1.55
         )
-
-        // 3. Subtle Parallax Image Settle
+        // Subtle cinematic parallax counter-zoom on authentic workshop photography
         .fromTo(
           imageRef.current,
-          { scale: 1.08 },
-          {
-            scale: 1.0,
-            duration: 1.2,
-            ease: "power2.out",
-          },
-          0
+          { scale: 1.16 },
+          { scale: 1.0, duration: 1.5, ease: "power2.out" },
+          1.55
         )
 
-        // 4. Clean Minimal Archival Caption Reveal
-        .to(
+        // PHASE 5: Archival Caption Reveals at Bottom Edge
+        .fromTo(
           expandedHudRef.current,
+          { opacity: 0, y: 14 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.4,
+            duration: 0.45,
             ease: "power2.out",
             pointerEvents: "auto",
           },
-          0.85
+          2.6
         );
 
       // Staggered reveal for 4-column editorial pillars
@@ -252,7 +233,7 @@ export default function ExpandingReveal() {
         className="relative min-h-[100dvh] flex flex-col items-center justify-center text-center px-4 sm:px-6"
       >
         {/* Editorial Eyebrow Badge */}
-        <div ref={badgeRef} className="mb-6 sm:mb-8 will-change-transform">
+        <div ref={badgeRef} className="mb-6 sm:mb-8 will-change-[opacity,transform]">
           <span className="font-mono text-xs uppercase tracking-widest text-white/50 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 inline-flex items-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-lime animate-pulse" />
             Core Philosophy
@@ -264,69 +245,30 @@ export default function ExpandingReveal() {
           ref={stageWrapRef}
           className="relative w-full max-w-7xl mx-auto flex items-center justify-center min-h-[460px] sm:min-h-[540px]"
         >
-          {/* Monumental Headline Layer */}
-          <div className="font-display font-extrabold uppercase tracking-tight text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem] leading-[1.08] select-none flex flex-col items-center justify-center w-full z-10 pointer-events-none">
-            {/* MOBILE PRESENTATION (screens < sm): Symmetrical Top / Aperture Gap / Bottom */}
-            <div className="sm:hidden flex flex-col items-center justify-center w-full py-2">
-              {/* Mobile Row 1 */}
-              <div ref={mobileTopTextRef} className="will-change-transform text-center mb-1">
-                <span className="block text-white text-xl xs:text-2xl leading-tight">WE ENGINEER</span>
-                <span className="block text-white/95 text-lg xs:text-xl leading-tight mt-0.5">PRODUCTION</span>
-              </div>
-
-              {/* Mobile Center Gap for Aperture Pill */}
-              <div className="h-10 w-24 my-1 shrink-0 pointer-events-none" />
-
-              {/* Mobile Row 2 */}
-              <div ref={mobileBottomTextRef} className="will-change-transform text-center mt-1">
-                <span className="block text-white/95 text-lg xs:text-xl leading-tight">SYSTEMS</span>
-                <span className="block text-white/80 text-xl xs:text-2xl leading-tight mt-0.5">THAT SCALE</span>
-              </div>
+          {/* Monumental Centered Typographic Headline Layer */}
+          <div className="font-display font-extrabold uppercase tracking-tight text-lg xs:text-xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4.5rem] leading-[1.12] sm:leading-[1.04] select-none flex flex-col items-center justify-center w-full z-10 pointer-events-none text-center px-2 sm:px-0">
+            {/* Part 1: WE ENGINEER */}
+            <div ref={part1Ref} className="will-change-[opacity,transform] mb-1 sm:mb-2 text-center">
+              <span className="block text-white whitespace-nowrap">WE ENGINEER</span>
             </div>
 
-            {/* DESKTOP PRESENTATION (screens >= sm): Monumental 3-Row Split */}
-            <div className="hidden sm:flex flex-col items-center justify-center w-full">
-              {/* Row 1 */}
-              <div ref={topTextRef} className="will-change-transform mb-1 sm:mb-2 text-center">
-                <span className="block text-white">WE ENGINEER</span>
-              </div>
+            {/* Part 2: PRODUCTION SYSTEMS */}
+            <div ref={part2Ref} className="will-change-[opacity,transform] mb-1 sm:mb-2 text-center">
+              <span className="block text-white/95 whitespace-nowrap">PRODUCTION SYSTEMS</span>
+            </div>
 
-              {/* Row 2: PRODUCTION [CENTER APERTURE SPACER] SYSTEMS */}
-              <div className="relative flex items-center justify-center w-full my-1 sm:my-2">
-                {/* Left half: ends at 50% - gap */}
-                <div className="w-1/2 flex justify-end items-center sm:pr-14 md:pr-16 lg:pr-20">
-                  <span
-                    ref={leftTextRef}
-                    className="inline-block text-white will-change-transform shrink-0 text-right whitespace-nowrap"
-                  >
-                    PRODUCTION
-                  </span>
-                </div>
-
-                {/* Right half: starts at 50% + gap */}
-                <div className="w-1/2 flex justify-start items-center sm:pl-14 md:pl-16 lg:pl-20">
-                  <span
-                    ref={rightTextRef}
-                    className="inline-block text-white/90 will-change-transform shrink-0 text-left whitespace-nowrap"
-                  >
-                    SYSTEMS
-                  </span>
-                </div>
-              </div>
-
-              {/* Row 3 */}
-              <div ref={bottomTextRef} className="will-change-transform mt-1 sm:mt-2 text-center">
-                <span className="block text-white/80">THAT SCALE</span>
-              </div>
+            {/* Part 3: THAT SCALE */}
+            <div ref={part3Ref} className="will-change-[opacity,transform] mt-1 sm:mt-2 text-center">
+              <span className="block text-white/80 whitespace-nowrap">THAT SCALE</span>
             </div>
           </div>
 
           {/* Cinematic Expanding Portal Card (Centered directly in stage) */}
           <div
             ref={portalRef}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(92vw,1140px)] aspect-[16/10] sm:aspect-[16/9] max-h-[540px] overflow-hidden select-none z-20 will-change-[clip-path] shadow-2xl shadow-black/95 rounded-[20px]"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(92vw,1140px)] aspect-[16/10] sm:aspect-[16/9] max-h-[560px] overflow-hidden select-none z-20 will-change-[clip-path,transform,opacity] shadow-2xl shadow-black/95 rounded-[24px] pointer-events-none"
           >
-            {/* Real Imagery with Parallax Scale */}
+            {/* Real Workshop Imagery with Parallax Scale */}
             <div ref={imageRef} className="absolute inset-0 will-change-transform">
               <Image
                 src={getAssetPath("/assets/gallery/fig1-workshop.jpg")}
@@ -336,26 +278,18 @@ export default function ExpandingReveal() {
                 priority
               />
               {/* Subtle bottom vignette strictly for caption readability */}
-              <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-obsidian/75 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-obsidian/85 to-transparent pointer-events-none" />
             </div>
 
             {/* Liquid Glass Edge Refraction */}
-            <div className="absolute inset-0 rounded-[inherit] border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] pointer-events-none" />
-
-            {/* Compact Resting State Indicator (Pill pulse in resting state) */}
-            <div
-              ref={compactOverlayRef}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-lime/90 animate-pulse" />
-            </div>
+            <div className="absolute inset-0 rounded-[inherit] border border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] pointer-events-none" />
 
             {/* Minimal Editorial Archival Badge Docked Discreetly at Bottom Edge */}
             <div
               ref={expandedHudRef}
-              className="absolute inset-x-0 bottom-0 p-4 sm:p-6 flex items-center justify-between z-10 opacity-0 pointer-events-none translate-y-2 will-change-[opacity,transform]"
+              className="absolute inset-x-0 bottom-0 p-4 sm:p-6 flex items-center justify-between z-10 opacity-0 pointer-events-none translate-y-3 will-change-[opacity,transform]"
             >
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-obsidian/80 backdrop-blur-md border border-white/10 text-white/90">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-white/10 text-white/90">
                 <span className="w-1.5 h-1.5 rounded-full bg-lime" />
                 <span className="font-mono text-[11px] sm:text-xs uppercase tracking-wider font-medium">
                   IEEE Student Branch · Engineering Workshops
@@ -372,7 +306,7 @@ export default function ExpandingReveal() {
         {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="mt-6 sm:mt-8 font-sans text-white/50 text-sm sm:text-base max-w-lg mx-auto will-change-transform leading-relaxed"
+          className="mt-6 sm:mt-8 font-sans text-white/50 text-sm sm:text-base max-w-lg mx-auto will-change-[opacity,transform] leading-relaxed"
         >
           High-concurrency hardware labs, neural accelerators, and resilient distributed architectures engineered for scale.
         </p>
