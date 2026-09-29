@@ -201,6 +201,30 @@ class InteractiveAscii {
       }
     });
     this.resizeObserver.observe(this.container);
+
+    // Visibility & Intersection Observers to eliminate offscreen CPU consumption
+    this.isVisible = true;
+    if (typeof IntersectionObserver !== "undefined") {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        this.isVisible = entry ? entry.isIntersecting : true;
+        if (this.isVisible && !document.hidden) {
+          this.startLoop();
+        } else {
+          this.stopLoop();
+        }
+      }, { rootMargin: "200px 0px" });
+      this.intersectionObserver.observe(this.container);
+    }
+
+    this.onVisibilityChange = () => {
+      if (document.hidden) {
+        this.stopLoop();
+      } else if (this.isVisible) {
+        this.startLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
   }
 
   playHoverSound() {
@@ -586,8 +610,13 @@ class InteractiveAscii {
 
   startLoop() {
     if (this.animationFrameId) return;
+    if (!this.isVisible || (typeof document !== 'undefined' && document.hidden)) return;
 
     const loop = () => {
+      if (!this.isVisible || (typeof document !== 'undefined' && document.hidden)) {
+        this.stopLoop();
+        return;
+      }
       this.update();
       this.render();
       this.animationFrameId = requestAnimationFrame(loop);
@@ -623,6 +652,12 @@ class InteractiveAscii {
     this.stopLoop();
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
+    }
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+    }
+    if (this.onVisibilityChange && typeof document !== 'undefined') {
+      document.removeEventListener('visibilitychange', this.onVisibilityChange);
     }
     if (this.container) {
       this.container.innerHTML = '';

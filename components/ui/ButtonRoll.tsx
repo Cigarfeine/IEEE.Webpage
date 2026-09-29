@@ -40,28 +40,30 @@ export default function ButtonRoll({
     ghost: "bg-transparent text-white hover:text-lime",
   }[variant];
 
-  const innerContent = (
-    <div
-      className={clsx(
-        "group relative inline-flex items-center justify-center overflow-hidden rounded-full transition-all duration-300 select-none cursor-pointer",
-        sizeStyles,
-        variantStyles,
-        className
-      )}
-      onClick={onClick}
-    >
+  const sharedClassName = clsx(
+    "group relative inline-flex items-center justify-center overflow-hidden rounded-full transition-all duration-300 select-none cursor-pointer",
+    sizeStyles,
+    variantStyles,
+    className
+  );
+
+  const content = (
+    <>
       {/* Content wrapper with dual-line roll */}
-      <div className="relative overflow-hidden flex items-center justify-center">
+      <div className="relative overflow-hidden flex items-center justify-center bg-inherit text-inherit">
         {/* Main visible text that slides UP on hover */}
-        <span className="inline-flex items-center gap-2 transform transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:-translate-y-[150%]">
+        <span className="inline-flex items-center gap-2 bg-inherit text-inherit transform transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:-translate-y-[150%]">
           {withDot && (
             <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
           )}
-          <span>{children}</span>
+          <span className="bg-inherit text-inherit">{children}</span>
         </span>
 
         {/* Duplicate absolute text that rolls IN from bottom on hover */}
-        <span className="absolute inset-0 inline-flex items-center justify-center gap-2 transform translate-y-[150%] transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-y-0">
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 inline-flex items-center justify-center gap-2 transform translate-y-[150%] transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-y-0"
+        >
           {withDot && (
             <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
           )}
@@ -70,21 +72,25 @@ export default function ButtonRoll({
       </div>
 
       {withArrow && (
-        <div className="ml-2 relative overflow-hidden w-4 h-4 flex items-center justify-center">
+        <div aria-hidden="true" className="ml-2 relative overflow-hidden w-4 h-4 flex items-center justify-center">
           <ArrowUpRight className="w-4 h-4 transform transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-x-3 group-hover:-translate-y-3" />
           <ArrowUpRight className="w-4 h-4 absolute transform -translate-x-3 translate-y-3 transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-x-0 group-hover:translate-y-0" />
         </div>
       )}
-    </div>
+    </>
   );
 
   if (href) {
     return (
-      <Link href={href} className="inline-block">
-        {innerContent}
+      <Link href={href} className={sharedClassName}>
+        {content}
       </Link>
     );
   }
 
-  return innerContent;
+  return (
+    <button type="button" onClick={onClick} className={sharedClassName}>
+      {content}
+    </button>
+  );
 }

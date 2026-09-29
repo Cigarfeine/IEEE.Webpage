@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Syne, Instrument_Serif, Plus_Jakarta_Sans, Space_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -32,6 +32,13 @@ const spaceMono = Space_Mono({
   weight: ["400", "700"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "IEEE Computer Society MBITS — Systems, AI & Computing Architecture",

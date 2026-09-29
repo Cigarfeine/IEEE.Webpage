@@ -162,6 +162,10 @@ export default function Footer() {
               <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
+                  name="name"
+                  id="footer-name"
+                  autoComplete="name"
+                  aria-label="Your Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
@@ -169,6 +173,10 @@ export default function Footer() {
                 />
                 <input
                   type="email"
+                  name="email"
+                  id="footer-email"
+                  autoComplete="email"
+                  aria-label="Your Email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -322,8 +330,8 @@ export default function Footer() {
       {/* MIDDLE TIER: DUAL CONVERGING ASCII HANDS STAGE */}
       <div className="w-full h-[220px] sm:h-[260px] lg:h-auto lg:flex-1 min-h-0 relative flex items-center justify-center my-0 overflow-hidden">
         <DualAsciiHands
-          leftHandSrc="/assets/hands/lefthand.png"
-          rightHandSrc="/assets/hands/righthand.png"
+          leftHandSrc="/assets/hands/lefthand.webp"
+          rightHandSrc="/assets/hands/righthand.webp"
         />
       </div>
 

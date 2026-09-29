@@ -17,6 +17,7 @@ const nextConfig = {
   assetPrefix,
   trailingSlash: true,
   reactStrictMode: true,
+  compress: true,
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
   images: {
     unoptimized: true,

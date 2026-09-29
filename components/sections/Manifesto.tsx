@@ -101,7 +101,7 @@ export default function Manifesto() {
       // Kinetic Word-by-Word Scrubbing Reveal
       gsap.fromTo(
         ".manifesto-word",
-        { opacity: 0.2 },
+        { opacity: 0.55 },
         {
           opacity: 1,
           stagger: 0.03,
@@ -163,10 +163,10 @@ export default function Manifesto() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         {/* Section Header */}
         <div className="flex items-center justify-between pb-6 border-b border-black/10 mb-16">
-          <span className="font-mono text-xs text-black/50 uppercase tracking-widest">
+          <span className="font-mono text-xs text-black/70 uppercase tracking-widest">
             Chapter Manifesto
           </span>
-          <span className="font-mono text-xs text-black/40">
+          <span className="font-mono text-xs text-black/60">
             2026
           </span>
         </div>
@@ -196,7 +196,7 @@ export default function Manifesto() {
             </div>
 
             <div className="p-6 rounded-2xl bg-white border border-black/5 shadow-sm">
-              <span className="font-mono text-xs uppercase tracking-wider text-black/50 block mb-2">
+              <span className="font-mono text-xs uppercase tracking-wider text-black/65 block mb-2">
                 AFFILIATION
               </span>
               <p className="font-medium text-sm text-black/80 leading-relaxed">

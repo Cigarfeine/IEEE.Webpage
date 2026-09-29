@@ -50,8 +50,8 @@ const DENSITY_GLYPHS = [
 ];
 
 export default function DualAsciiHands({
-  leftHandSrc = "/assets/hands/lefthand.png",
-  rightHandSrc = "/assets/hands/righthand.png",
+  leftHandSrc = "/assets/hands/lefthand.webp",
+  rightHandSrc = "/assets/hands/righthand.webp",
   className = "",
 }: DualAsciiHandsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -317,10 +317,53 @@ export default function DualAsciiHands({
       animationFrameId = requestAnimationFrame(render);
     };
 
-    animationFrameId = requestAnimationFrame(render);
+    let isVisible = true;
+    let io: IntersectionObserver | null = null;
+
+    const startLoop = () => {
+      if (!animationFrameId && isVisible && !document.hidden) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+      }
+    };
+
+    if (typeof IntersectionObserver !== "undefined") {
+      io = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isVisible = entry ? entry.isIntersecting : true;
+          if (isVisible && !document.hidden) {
+            startLoop();
+          } else {
+            stopLoop();
+          }
+        },
+        { rootMargin: "200px 0px" }
+      );
+      io.observe(container);
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else if (isVisible) {
+        startLoop();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    startLoop();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
+      if (io) io.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("resize", resize);
       canvas.removeEventListener("mousemove", handleMouseMove);
       canvas.removeEventListener("mouseleave", handleMouseLeave);
