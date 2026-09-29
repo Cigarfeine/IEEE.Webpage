@@ -40,29 +40,6 @@ An editorial, high-performance web experience crafted for the **IEEE Computer So
 - **Typography**: Syne, Instrument Serif, Plus Jakarta Sans, Space Mono
 - **Deployment**: GitHub Pages via GitHub Actions
 
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/Cigarfeine/IEEE.Webpage.git
-cd IEEE.Webpage
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-Visit [`http://localhost:3000`](http://localhost:3000) to view the application.
-
-### Production Static Export
-
-```bash
-# Build optimized static distribution into ./out
-npm run build
-```
-
 ---
 
 <div align="center">
