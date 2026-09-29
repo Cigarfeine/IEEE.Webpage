@@ -34,9 +34,9 @@ class InteractiveAscii {
     // Strictly pure ASCII art gradient characters (no alphabet, no numbers, no symbols outside ASCII art)
     this.asciiChars = ".:-=+*#%@";
 
-    // Character Sets
+    // Character Sets - Calibrated for smooth optical density transitions
     this.charSets = {
-      standard: " .':-=+*#%@",
+      standard: "  ..::--==++**##%%@@",
       detailed: " .'`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$",
       blocks: " ░▒▓█",
       binary: " 01",
@@ -368,10 +368,18 @@ class InteractiveAscii {
         let blue = imgData[idx + 2];
         const alpha = imgData[idx + 3] / 255;
 
-        // Apply contrast & brightness
-        let bright = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
-        bright = ((bright - 0.5) * this.options.contrast + 0.5) * this.options.brightness;
-        bright = Math.max(0, Math.min(1, bright));
+        // Photographic Sigmoid Tone Curve
+        // 1. Gamma pre-conditioning (lifts midtone shadow detail without crushing delicate veil folds)
+        const rawLuminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+        const gamma = 1.16;
+        let v = Math.pow(Math.max(0, Math.min(1, rawLuminance)), 1 / gamma);
+
+        // 2. Smooth cubic Hermite sigmoid S-curve: deepens background obsidian while expanding highlight presence
+        const contrastExp = 1.30;
+        let bright = v < 0.5 
+          ? 0.5 * Math.pow(2 * v, contrastExp) 
+          : 1.0 - 0.5 * Math.pow(2 * (1.0 - v), contrastExp);
+        bright = Math.max(0, Math.min(1, bright * this.options.brightness));
 
         if (this.options.invert) {
           bright = 1 - bright;
@@ -537,7 +545,7 @@ class InteractiveAscii {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    ctx.font = `bold ${this.fontSize}px ${this.options.fontFamily}`;
+    ctx.font = `600 ${this.fontSize}px ${this.options.fontFamily}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
@@ -558,15 +566,15 @@ class InteractiveAscii {
       const p = this.grid[i];
 
       // Skip rendering empty spaces / dark background strictly
-      if (p.brightness < 0.075 || (p.edgeFade !== undefined && p.edgeFade < 0.03)) continue;
+      if (p.brightness < 0.05 || (p.edgeFade !== undefined && p.edgeFade < 0.02)) continue;
 
       const charToDraw = (hoverMode === 'glitch' && p.scrambleTimer > 0) ? p.scrambleChar : p.char;
       if (!charToDraw || charToDraw === ' ') continue;
 
       let color;
-      // Smooth continuous alpha scaling that dissolves organically into obsidian without any stepped cliff
-      let alpha = Math.min(1, p.brightness * 1.25) * (p.edgeFade !== undefined ? p.edgeFade : 1.0);
-      if (alpha < 0.035) continue;
+      let alpha;
+      const br = p.brightness;
+      const ef = p.edgeFade !== undefined ? p.edgeFade : 1.0;
 
       if (isRgb) {
         // Sampled RGB
@@ -574,16 +582,49 @@ class InteractiveAscii {
         const r = Math.min(255, Math.round(p.r * boost));
         const g = Math.min(255, Math.round(p.g * boost));
         const b = Math.min(255, Math.round(p.b * boost));
+        alpha = Math.min(1, br * 1.35) * ef;
         color = `rgba(${r}, ${g}, ${b}, ${alpha})`;
-      } else if (p.proximity > 0.35 && p.scrambleTimer > 0) {
-        color = theme.accent || '#DDF45B';
       } else {
-        color = theme.fg;
+        // Multi-Tier Luminance Color Grading (Good-Fella Digital Landmark Signature)
+        // High visibility with illuminated highlight crests while preserving velvety, soft neoclassical drapery
+        if (br >= 0.65) {
+          // TIER 1: Hyper-Luminescent Highlight Crests (forehead, nose bridge, veil ridge crests)
+          // Smoothly transitions from vibrant lime-white to pure alabaster ivory
+          const t = Math.min(1, (br - 0.65) / 0.35);
+          const r = Math.round(225 + 30 * t); // 225 -> 255
+          const g = Math.round(246 + 9 * t);  // 246 -> 255
+          const b = Math.round(95 + 160 * t); // 95 -> 255
+          alpha = (0.88 + t * 0.12) * ef;
+          color = `rgba(${r}, ${g}, ${b}, ${Math.min(1, alpha)})`;
+        } else if (br >= 0.25) {
+          // TIER 2: Signature IEEE / Good-Fella Lime Midtones (facial planes, fabric drapery)
+          // Radiant, velvety midtone illumination
+          const t = (br - 0.25) / (0.65 - 0.25);
+          const r = Math.round(145 + 80 * t); // 145 -> 225
+          const g = Math.round(185 + 61 * t); // 185 -> 246
+          const b = Math.round(36 + 59 * t);  // 36 -> 95
+          alpha = (0.58 + t * 0.30) * ef;
+          color = `rgba(${r}, ${g}, ${b}, ${Math.min(1, alpha)})`;
+        } else {
+          // TIER 3: Sculpted Silhouette Shadows (neck, hair boundary, fold creases)
+          // Preserves volumetric mass and anatomical outline against dark obsidian
+          const t = Math.max(0, (br - 0.05) / (0.25 - 0.05));
+          const r = Math.round(65 + 80 * t);  // 65 -> 145
+          const g = Math.round(85 + 100 * t); // 85 -> 185
+          const b = Math.round(30 + 6 * t);   // 30 -> 36
+          alpha = (0.28 + t * 0.30) * ef;
+          color = `rgba(${r}, ${g}, ${b}, ${Math.min(1, alpha)})`;
+        }
+
+        // Active hover interaction accent
+        if (p.proximity > 0.35 && p.scrambleTimer > 0) {
+          color = '#FFFFFF';
+        }
       }
 
       ctx.fillStyle = color;
-      ctx.globalAlpha = alpha;
-      ctx.shadowBlur = 0; // Zero bloom blur for clean, crisp rendering
+      ctx.globalAlpha = 1.0;
+      ctx.shadowBlur = 0; // Strictly zero bloom blur — clean, authentic typography
 
       ctx.fillText(charToDraw, p.x, p.y);
     }

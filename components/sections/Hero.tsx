@@ -200,7 +200,12 @@ export default function Hero() {
 
             {/* Right Column: Interactive ASCII Veiled Statue with breathing room */}
             <div className="hero-media lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex items-center justify-end w-full lg:translate-x-3 xl:translate-x-6 2xl:translate-x-8 will-change-transform">
-              <div className="w-full max-w-[540px] sm:max-w-[620px] lg:max-w-[720px] xl:max-w-[820px] 2xl:max-w-[900px] flex justify-end ml-auto">
+              <div className="relative w-full max-w-[540px] sm:max-w-[620px] lg:max-w-[720px] xl:max-w-[820px] 2xl:max-w-[900px] flex justify-end ml-auto">
+                {/* Subtle studio rim backlight for photographic figure-ground separation */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-[radial-gradient(ellipse_60%_55%_at_55%_48%,rgba(203,235,58,0.11)_0%,rgba(203,235,58,0.03)_50%,transparent_75%)] blur-2xl will-change-transform"
+                />
                 <AsciiViewer />
               </div>
             </div>
