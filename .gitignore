@@ -10,3 +10,12 @@ build/
 .impeccable/
 .DS_Store
 CONV_ACSII/
+AGENTS.md
+CLAUDE.md
+PRODUCT.md
+PROJECT.md
+agent.md
+context.md
+.vscode/
+.idea/
+*.tsbuildinfo
