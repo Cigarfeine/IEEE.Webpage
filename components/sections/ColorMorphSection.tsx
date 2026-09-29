@@ -160,24 +160,30 @@ export default function ColorMorphSection() {
             return (
               <div
                 key={idx}
-                className="stat-box p-6 sm:p-7 rounded-2xl bg-black/25 backdrop-blur-md border border-white/10 hover:border-lime/40 transition-all duration-300"
+                className="stat-box group p-1 rounded-2xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 transition-all duration-500 hover:border-white/20 shadow-lg"
               >
-                <Icon className="w-6 h-6 text-lime mb-4" />
-                <span
-                  className="stat-num font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white block mb-1"
-                  data-target={stat.target}
-                  data-prefix={stat.prefix}
-                  data-suffix={stat.suffix}
-                  data-decimal={stat.decimal ? "true" : "false"}
-                >
-                  {stat.value}
-                </span>
-                <span className="font-bold text-sm text-white/90 block">
-                  {stat.label}
-                </span>
-                <span className="font-mono text-xs text-white/50 block mt-1">
-                  {stat.sub}
-                </span>
+                <div className="rounded-[calc(1rem-2px)] p-6 bg-black/40 backdrop-blur-xl border border-white/[0.02] flex flex-col justify-between h-full">
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-lime mb-4 group-hover:scale-105 transition-transform duration-300">
+                    <Icon className="w-5 h-5 stroke-[1.75]" />
+                  </div>
+                  <div>
+                    <span
+                      className="stat-num font-sans font-extrabold text-3xl sm:text-4xl text-white block mb-1 tracking-tight"
+                      data-target={stat.target}
+                      data-prefix={stat.prefix}
+                      data-suffix={stat.suffix}
+                      data-decimal={stat.decimal ? "true" : "false"}
+                    >
+                      {stat.value}
+                    </span>
+                    <span className="font-semibold text-sm text-white/90 block">
+                      {stat.label}
+                    </span>
+                    <span className="font-mono text-xs text-white/50 block mt-1">
+                      {stat.sub}
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -188,26 +194,28 @@ export default function ColorMorphSection() {
           {testimonials.map((item, idx) => (
             <div
               key={idx}
-              className="p-8 rounded-3xl bg-black/30 backdrop-blur-md border border-white/10 flex flex-col justify-between"
+              className="group p-1.5 rounded-3xl bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 transition-all duration-500 hover:border-white/20 shadow-xl"
             >
-              <div className="mb-6">
-                <div className="flex gap-1 text-lime mb-4">
-                  {[...Array(5)].map((_, starIdx) => (
-                    <Star key={starIdx} className="w-4 h-4 fill-current" />
-                  ))}
+              <div className="rounded-[calc(1.5rem-2px)] p-7 sm:p-8 bg-black/40 backdrop-blur-xl border border-white/[0.02] flex flex-col justify-between h-full">
+                <div className="mb-6">
+                  <div className="flex gap-1 text-lime/90 mb-4">
+                    {[...Array(5)].map((_, starIdx) => (
+                      <Star key={starIdx} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-base sm:text-lg text-white/85 leading-relaxed italic font-serif">
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
                 </div>
-                <p className="text-base sm:text-lg text-white/90 leading-relaxed italic font-serif">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
-              </div>
 
-              <div className="pt-4 border-t border-white/10">
-                <span className="font-display font-bold text-white block">
-                  {item.author}
-                </span>
-                <span className="font-mono text-xs text-lime/80 block mt-0.5">
-                  {item.role}
-                </span>
+                <div className="pt-4 border-t border-white/10">
+                  <span className="font-display font-bold text-white block">
+                    {item.author}
+                  </span>
+                  <span className="font-mono text-xs text-lime/80 block mt-0.5">
+                    {item.role}
+                  </span>
+                </div>
               </div>
             </div>
           ))}

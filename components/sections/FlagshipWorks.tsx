@@ -289,34 +289,35 @@ export default function FlagshipWorks() {
                 id={`work-project-${idx}`}
                 className="work-project-card group relative scroll-mt-28"
               >
-                {/* Showcase Stage Container with matching rounded-2xl sm:rounded-3xl */}
-                <div className="work-card-stage relative w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#141918] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:border-lime/40 group-hover:shadow-[0_25px_60px_rgba(203,235,58,0.12)]">
-                  
-                  {/* Inertial Parallax Image Inside Stage */}
-                  <div className="absolute inset-[-8%] w-[116%] h-[116%] overflow-hidden">
-                    <Image
-                      src={work.image}
-                      alt={work.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 68vw"
-                      className="work-parallax-img object-cover will-change-transform filter brightness-95 group-hover:brightness-105 group-hover:scale-[1.07] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                      priority={idx === 0}
-                    />
-                  </div>
+                {/* Double-Bezel Showcase Stage Container */}
+                <div className="p-1.5 sm:p-2 rounded-[2.25rem] bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:border-white/20 group-hover:shadow-[0_30px_70px_rgba(0,0,0,0.8)]">
+                  <div className="work-card-stage relative w-full aspect-[16/10] rounded-[calc(2.25rem-0.5rem)] overflow-hidden bg-[#141918] border border-white/[0.04]">
+                    {/* Inertial Parallax Image Inside Stage */}
+                    <div className="absolute inset-[-8%] w-[116%] h-[116%] overflow-hidden">
+                      <Image
+                        src={work.image}
+                        alt={work.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 68vw"
+                        className="work-parallax-img object-cover will-change-transform filter brightness-95 group-hover:brightness-105 group-hover:scale-[1.07] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                        priority={idx === 0}
+                      />
+                    </div>
 
-                  {/* High-end Cinematic Studio Lighting & Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/25 pointer-events-none transition-opacity duration-700 group-hover:opacity-70" />
+                    {/* High-end Cinematic Studio Lighting & Vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-black/30 pointer-events-none transition-opacity duration-700 group-hover:opacity-70" />
 
-                  {/* Clean Inset Action Badge with tactile hover reaction */}
-                  <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 group-hover:translate-x-1">
-                    <ButtonRoll href={work.link} variant="lime" size="sm" withArrow>
-                      VIEW PROJECT
-                    </ButtonRoll>
+                    {/* Clean Inset Action Badge with tactile hover reaction */}
+                    <div className="absolute top-6 left-6 sm:top-8 sm:left-8 z-20 transform transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 group-hover:translate-x-1">
+                      <ButtonRoll href={work.link} variant="lime" size="sm" withArrow>
+                        VIEW PROJECT
+                      </ButtonRoll>
+                    </div>
                   </div>
                 </div>
 
                 {/* Metadata Row Under Image */}
-                <div className="mt-4 px-1 flex flex-wrap items-center justify-between gap-3 font-mono">
+                <div className="mt-4 px-2 flex flex-wrap items-center justify-between gap-3 font-mono">
                   <h3 className="font-sans font-bold uppercase text-sm sm:text-base text-white group-hover:text-lime transition-colors duration-300 tracking-wider">
                     {work.title}
                   </h3>

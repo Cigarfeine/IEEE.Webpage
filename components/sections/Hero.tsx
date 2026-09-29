@@ -18,12 +18,17 @@ export default function Hero() {
       gsap.registerPlugin(ScrollTrigger);
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-title-line", {
+      tl.from(".hero-badge", {
         opacity: 0,
-        y: 40,
-        duration: 1,
-        stagger: 0.15,
+        y: 15,
+        duration: 0.8,
       })
+        .from(".hero-title-line", {
+          opacity: 0,
+          y: 35,
+          duration: 0.9,
+          stagger: 0.12,
+        }, "-=0.4")
         .from(
           ".hero-desc",
           {
@@ -157,9 +162,17 @@ export default function Hero() {
             
             {/* Left Column: Quiet, Powerful Headline & Clean CTAs */}
             <div className="hero-text-col lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex flex-col justify-center will-change-transform">
+              {/* Soft Editorial Chapter Badge */}
+              <div className="hero-badge inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 ring-1 ring-white/5 backdrop-blur-md mb-6 w-fit select-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_8px_#CBEB3A]" />
+                <span className="font-mono text-[11px] uppercase tracking-widest text-white/70">
+                  IEEE CS CHAPTER • 2026 COHORT
+                </span>
+              </div>
+
               <h1
                 ref={headlineRef}
-                className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[4.25rem] xl:text-[5rem] leading-[0.97] tracking-tight text-white mb-6 select-none"
+                className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[4.25rem] xl:text-[4.85rem] leading-[0.98] tracking-tight text-white mb-6 select-none"
               >
                 <span className="hero-title-line block">We engineer</span>
                 <span className="hero-title-line block">
@@ -178,22 +191,24 @@ export default function Hero() {
                 systems engineering, applied machine intelligence, and distributed architecture.
               </p>
 
-              {/* Good-Fella style Minimal CTAs */}
-              <div className="hero-cta flex flex-wrap items-center gap-6">
+              {/* High-End Soft CTAs */}
+              <div className="hero-cta flex flex-wrap items-center gap-5 sm:gap-6">
                 <a
                   href="#works"
-                  className="group inline-flex items-center gap-3 px-6 py-3 rounded-sm bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/90 hover:shadow-[0_0_20px_rgba(203,235,58,0.3)]"
+                  className="group relative cursor-pointer inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02]"
                 >
                   <span>EXPLORE WORKS</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span className="w-7 h-7 rounded-full bg-obsidian/15 flex items-center justify-center text-obsidian transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </span>
                 </a>
 
                 <a
                   href="#manifesto"
-                  className="group inline-flex items-center gap-2 text-white/70 hover:text-white font-mono text-xs uppercase tracking-wider transition-colors pb-0.5 border-b border-white/20 hover:border-white"
+                  className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-white/20 text-white/80 hover:text-white font-mono text-xs uppercase tracking-wider transition-all duration-300 backdrop-blur-sm"
                 >
                   <span>Read the manifesto</span>
-                  <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  <span className="text-lime transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </a>
               </div>
             </div>

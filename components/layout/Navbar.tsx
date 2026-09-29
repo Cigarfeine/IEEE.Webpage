@@ -74,9 +74,9 @@ export default function Navbar() {
         ref={headerRef}
         className={`fixed inset-x-0 top-0 z-[100] transition-[padding,background-color,border-color] duration-500 ease-out ${
           menuOpen
-            ? "py-5 sm:py-6 bg-[#0a0d12] border-b border-white/10"
+            ? "py-5 sm:py-6 bg-[#080c0e] border-b border-white/10"
             : scrolled
-            ? "py-4 sm:py-5 bg-[#0a0d12]/90 backdrop-blur-2xl border-b border-white/[0.06] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]"
+            ? "py-3.5 sm:py-4 bg-[#080c0e]/85 backdrop-blur-2xl border-b border-white/[0.07] shadow-[0_12px_36px_-10px_rgba(0,0,0,0.85)]"
             : "pt-6 sm:pt-8 pb-4 bg-transparent border-b border-transparent"
         }`}
       >
@@ -145,19 +145,15 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* COLUMN 3 (RIGHT): Minimal Architectural CTA Button */}
+          {/* COLUMN 3 (RIGHT): High-End Soft Button-in-Button CTA */}
           <div className="justify-self-end hidden lg:inline-flex">
             <a
               href="#join"
-              className="group min-w-0 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap font-mono text-xs sm:text-sm uppercase tracking-wider inline-flex transition-all duration-300"
+              className="group relative cursor-pointer select-none inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02]"
             >
-              <span className="relative flex items-center">
-                <span className="flex items-center justify-center h-10 sm:h-11 px-5 sm:px-6 bg-lime text-black font-semibold rounded-sm transition-all duration-300 group-hover:bg-lime/90 group-hover:shadow-[0_0_20px_rgba(203,235,58,0.3)]">
-                  <span>Join chapter</span>
-                </span>
-                <span className="flex items-center justify-center w-10 sm:w-11 h-10 sm:h-11 ml-1 bg-lime text-black rounded-sm transition-all duration-300 group-hover:bg-lime/90">
-                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
+              <span>Join chapter</span>
+              <span className="w-8 h-8 rounded-full bg-obsidian/15 flex items-center justify-center text-obsidian transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </span>
             </a>
           </div>

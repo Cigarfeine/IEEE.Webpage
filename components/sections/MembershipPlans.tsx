@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import ButtonRoll from "@/components/ui/ButtonRoll";
 import SectionOverlay from "@/components/ui/SectionOverlay";
-import { Check, Flame, Sparkles } from "lucide-react";
+import { Check } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -55,7 +55,7 @@ export default function MembershipPlans() {
     },
     {
       name: "Core Fellow",
-      tag: "Most Popular 🔥",
+      tag: "RECOMMENDED COHORT",
       price: billingPeriod === "annual" ? "₹2,400" : "₹1,400",
       period: billingPeriod === "annual" ? "/year" : "/semester",
       desc: "For serious builders and researchers actively executing projects and competitive hackathons.",
@@ -107,23 +107,25 @@ export default function MembershipPlans() {
             commence production development.
           </p>
 
-          {/* Habito-style Interactive Sliding Pill Switch */}
-          <div className="mt-8 inline-flex items-center gap-3 p-1.5 rounded-full bg-black/5 border border-black/10">
+          {/* Interactive Sliding Pill Switch */}
+          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-black/[0.04] border border-black/10 backdrop-blur-md shadow-xs">
             <button
+              type="button"
               onClick={() => setBillingPeriod("annual")}
-              className={`px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
                 billingPeriod === "annual"
-                  ? "bg-petrol text-white shadow-md"
+                  ? "bg-petrol text-white shadow-sm font-semibold"
                   : "text-black/60 hover:text-black"
               }`}
             >
-              Annual Fellowship (Save 20%)
+              Annual Fellowship <span className="text-lime font-mono text-[10px] ml-1">(-20%)</span>
             </button>
             <button
+              type="button"
               onClick={() => setBillingPeriod("semester")}
-              className={`px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
                 billingPeriod === "semester"
-                  ? "bg-petrol text-white shadow-md"
+                  ? "bg-petrol text-white shadow-sm font-semibold"
                   : "text-black/60 hover:text-black"
               }`}
             >
@@ -137,76 +139,94 @@ export default function MembershipPlans() {
           {plans.map((plan, idx) => (
             <div
               key={idx}
-              className={`plan-card relative flex flex-col justify-between p-8 rounded-3xl transition-all duration-300 ${
+              className={`plan-card relative p-1.5 sm:p-2 rounded-[2.25rem] transition-all duration-500 ${
                 plan.popular
-                  ? "bg-white border-2 border-petrol shadow-xl shadow-petrol/10 lg:-translate-y-2"
-                  : "bg-white/70 border border-black/10 hover:border-black/30 shadow-sm"
+                  ? "bg-gradient-to-b from-petrol/30 via-petrol/10 to-petrol/5 border border-petrol/40 shadow-xl shadow-petrol/10 lg:-translate-y-2.5"
+                  : "bg-black/[0.02] border border-black/10 hover:border-black/20"
               }`}
             >
+              {/* Recommended Floating Badge */}
               {plan.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-lime text-obsidian font-mono text-[11px] font-black uppercase tracking-wider shadow-md flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 fill-current" />
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-petrol text-white font-mono text-[10px] font-bold uppercase tracking-widest shadow-md flex items-center gap-2 border border-white/20 z-20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_6px_#CBEB3A]" />
                   {plan.tag}
                 </div>
               )}
 
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-display font-bold text-2xl text-black">
-                    {plan.name}
-                  </h3>
-                  {!plan.popular && (
-                    <span className="font-mono text-[10px] text-black/50 uppercase px-2.5 py-1 rounded-full bg-black/5 border border-black/5">
-                      {plan.tag}
-                    </span>
-                  )}
-                </div>
+              {/* Inner Core Enclosure */}
+              <div
+                className={`relative rounded-[calc(2.25rem-0.5rem)] p-7 sm:p-8 flex flex-col justify-between h-full overflow-hidden ${
+                  plan.popular
+                    ? "bg-white border border-petrol/15 shadow-md"
+                    : "bg-white/80 border border-black/5 shadow-xs"
+                }`}
+              >
+                {/* Diffused subtle highlight for featured card */}
+                {plan.popular && (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-petrol/[0.05] blur-2xl"
+                  />
+                )}
 
-                <div className="flex items-baseline gap-1 mb-4">
-                  <span className="font-display font-extrabold text-4xl sm:text-5xl text-black">
-                    {plan.price}
-                  </span>
-                  <span className="font-mono text-xs text-black/50">
-                    {plan.period}
-                  </span>
-                </div>
-
-                <p className="text-xs sm:text-sm text-black/70 leading-relaxed mb-8 pb-6 border-b border-black/10">
-                  {plan.desc}
-                </p>
-
-                <div className="space-y-3.5 mb-8">
-                  {plan.features.map((feature, fIdx) => (
-                    <div key={fIdx} className="flex items-start gap-3">
-                      <div
-                        className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                          plan.popular
-                            ? "bg-petrol text-white"
-                            : "bg-black/10 text-black"
-                        }`}
-                      >
-                        <Check className="w-2.5 h-2.5 stroke-[3]" />
-                      </div>
-                      <span className="text-xs text-black/80 font-medium leading-tight">
-                        {feature}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-display font-bold text-2xl text-black">
+                      {plan.name}
+                    </h3>
+                    {!plan.popular && (
+                      <span className="font-mono text-[10px] text-black/55 uppercase px-2.5 py-1 rounded-full bg-black/[0.04] border border-black/5">
+                        {plan.tag}
                       </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                    )}
+                  </div>
 
-              <div className="pt-6 border-t border-black/10">
-                <ButtonRoll
-                  href="#join"
-                  variant={plan.popular ? "dark" : "paper"}
-                  size="md"
-                  withArrow
-                  className={`w-full justify-center ${
-                    plan.popular ? "!bg-petrol !text-white hover:!bg-petrol-dark" : ""
-                  }`}
-                >
-                  JOIN NOW
-                </ButtonRoll>
+                  <div className="flex items-baseline gap-1.5 mb-4">
+                    <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-tight text-black">
+                      {plan.price}
+                    </span>
+                    <span className="font-mono text-xs text-black/50">
+                      {plan.period}
+                    </span>
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-black/70 leading-relaxed mb-8 pb-6 border-b border-black/10 font-normal">
+                    {plan.desc}
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    {plan.features.map((feature, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-3 group/feat">
+                        <div
+                          className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                            plan.popular
+                              ? "bg-petrol/10 text-petrol group-hover/feat:bg-petrol group-hover/feat:text-white"
+                              : "bg-black/5 text-black/70 group-hover/feat:bg-black/10"
+                          }`}
+                        >
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
+                        </div>
+                        <span className="text-xs text-black/75 font-normal leading-relaxed group-hover/feat:text-black transition-colors">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-black/10">
+                  <ButtonRoll
+                    href="#join"
+                    variant={plan.popular ? "dark" : "paper"}
+                    size="md"
+                    withArrow
+                    className={`w-full justify-center ${
+                      plan.popular ? "!bg-petrol !text-white hover:!bg-petrol-dark shadow-sm" : ""
+                    }`}
+                  >
+                    JOIN FELLOWSHIP
+                  </ButtonRoll>
+                </div>
               </div>
             </div>
           ))}
