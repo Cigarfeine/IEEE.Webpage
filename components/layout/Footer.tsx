@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, Check, Globe } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Check, Globe } from "lucide-react";
 import DualAsciiHands from "@/components/ui/DualAsciiHands";
 import { getAssetPath } from "@/lib/utils";
 import gsap from "gsap";
@@ -169,7 +169,7 @@ export default function Footer() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your Name"
-                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3.5 py-2 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
+                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
                 />
                 <input
                   type="email"
@@ -181,14 +181,14 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@domain.edu"
-                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-sm px-3.5 py-2 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
+                  className="w-full sm:w-1/2 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-xs text-white placeholder:text-white/30 focus:border-lime/60 focus:outline-none transition-colors"
                 />
               </div>
 
-              <div className="flex items-center gap-1.5 mt-0.5">
+              <div className="flex items-center gap-1.5 mt-1">
                 <button
                   type="submit"
-                  className="flex-1 bg-lime hover:bg-lime/90 text-obsidian font-mono font-bold text-xs uppercase tracking-wider py-2.5 px-4 rounded-sm transition-all duration-200 flex items-center justify-between cursor-pointer shadow-[0_0_12px_rgba(203,235,58,0.2)]"
+                  className="group/btn inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02] cursor-pointer"
                 >
                   {subscribed ? (
                     <span className="flex items-center gap-1.5">
@@ -197,7 +197,9 @@ export default function Footer() {
                   ) : (
                     <span>JOIN DISPATCHES</span>
                   )}
-                  <span className="text-obsidian font-bold text-sm">+</span>
+                  <span className="w-7 h-7 rounded-full bg-obsidian/15 flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
+                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                  </span>
                 </button>
               </div>
 

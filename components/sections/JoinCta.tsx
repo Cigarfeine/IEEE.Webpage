@@ -58,7 +58,7 @@ export default function JoinCta() {
     <section
       ref={sectionRef}
       id="join"
-      className="py-24 sm:py-32 bg-obsidian text-white relative z-10 overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.95)]"
+      className="pt-20 pb-24 sm:pt-24 sm:pb-32 bg-obsidian text-white border-t border-white/10 relative z-10 overflow-hidden"
     >
       {/* Background glow elements */}
       <div
@@ -68,10 +68,6 @@ export default function JoinCta() {
 
       <div className="max-w-4xl mx-auto px-6 sm:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 ring-1 ring-white/5 font-mono text-[11px] uppercase tracking-widest text-white/70 mb-4 select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_8px_#CBEB3A]" />
-            COHORT ADMISSIONS • 2026
-          </div>
           <h2 className="font-display font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight leading-tight text-white mb-6">
             Ready to build with us?
           </h2>
@@ -147,14 +143,13 @@ export default function JoinCta() {
               {/* Inputs grid with luxury nested enclosures */}
               <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="group space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <label
                       htmlFor="join-name"
                       className="font-mono text-xs uppercase tracking-wider text-white/60 group-focus-within:text-lime transition-colors"
                     >
                       Full Name
                     </label>
-                    <span className="font-mono text-[10px] text-white/30">FIELD_01</span>
                   </div>
                   <div className="relative rounded-2xl bg-white/[0.03] p-1 border border-white/10 group-focus-within:border-lime/60 group-focus-within:ring-2 group-focus-within:ring-lime/10 transition-all duration-300">
                     <input
@@ -173,14 +168,13 @@ export default function JoinCta() {
                 </div>
 
                 <div className="group space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <label
                       htmlFor="join-email"
                       className="font-mono text-xs uppercase tracking-wider text-white/60 group-focus-within:text-lime transition-colors"
                     >
                       Email Address
                     </label>
-                    <span className="font-mono text-[10px] text-white/30">FIELD_02</span>
                   </div>
                   <div className="relative rounded-2xl bg-white/[0.03] p-1 border border-white/10 group-focus-within:border-lime/60 group-focus-within:ring-2 group-focus-within:ring-lime/10 transition-all duration-300">
                     <input
@@ -199,14 +193,13 @@ export default function JoinCta() {
                 </div>
 
                 <div className="group space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <label
                       htmlFor="join-dept"
                       className="font-mono text-xs uppercase tracking-wider text-white/60 group-focus-within:text-lime transition-colors"
                     >
                       Department &amp; Year
                     </label>
-                    <span className="font-mono text-[10px] text-white/30">FIELD_03</span>
                   </div>
                   <div className="relative rounded-2xl bg-white/[0.03] p-1 border border-white/10 group-focus-within:border-lime/60 group-focus-within:ring-2 group-focus-within:ring-lime/10 transition-all duration-300">
                     <input
@@ -225,14 +218,13 @@ export default function JoinCta() {
                 </div>
 
                 <div className="group space-y-2">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center">
                     <label
                       htmlFor="join-github"
                       className="font-mono text-xs uppercase tracking-wider text-white/60 group-focus-within:text-lime transition-colors"
                     >
                       GitHub / Portfolio URL
                     </label>
-                    <span className="font-mono text-[10px] text-white/30">FIELD_04</span>
                   </div>
                   <div className="relative rounded-2xl bg-white/[0.03] p-1 border border-white/10 group-focus-within:border-lime/60 group-focus-within:ring-2 group-focus-within:ring-lime/10 transition-all duration-300">
                     <input

@@ -321,8 +321,8 @@ export default function FlagshipWorks() {
                   <h3 className="font-sans font-bold uppercase text-sm sm:text-base text-white group-hover:text-lime transition-colors duration-300 tracking-wider">
                     {work.title}
                   </h3>
-                  <span className="text-xs text-white/50 tracking-wider">
-                    {work.discipline}
+                  <span className="text-xs text-white/40 tracking-wider">
+                    {work.year}
                   </span>
                 </div>
               </div>

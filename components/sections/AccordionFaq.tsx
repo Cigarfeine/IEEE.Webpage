@@ -65,15 +65,11 @@ export default function AccordionFaq() {
     <section
       ref={sectionRef}
       id="faq"
-      className="py-24 sm:py-32 bg-obsidian text-white border-t border-white/10 relative overflow-hidden"
+      className="pt-24 pb-16 sm:pt-32 sm:pb-20 bg-obsidian text-white border-t border-white/10 relative overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-6 sm:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-white/10 ring-1 ring-white/5 font-mono text-[11px] uppercase tracking-widest text-white/70 mb-4 select-none">
-            <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_8px_#CBEB3A]" />
-            PROTOCOL ARCHIVES
-          </div>
           <h2 className="font-display font-bold text-3xl sm:text-5xl tracking-tight leading-tight text-white mb-4">
             Frequently Asked Questions.
           </h2>

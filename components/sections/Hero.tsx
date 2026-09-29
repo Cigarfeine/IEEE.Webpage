@@ -18,16 +18,11 @@ export default function Hero() {
       gsap.registerPlugin(ScrollTrigger);
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      tl.from(".hero-badge", {
+      tl.from(".hero-title-line", {
         opacity: 0,
-        y: 15,
-        duration: 0.8,
-      })
-        .from(".hero-title-line", {
-          opacity: 0,
-          y: 35,
-          duration: 0.9,
-          stagger: 0.12,
+        y: 35,
+        duration: 0.9,
+        stagger: 0.12,
         }, "-=0.4")
         .from(
           ".hero-desc",
@@ -162,14 +157,6 @@ export default function Hero() {
             
             {/* Left Column: Quiet, Powerful Headline & Clean CTAs */}
             <div className="hero-text-col lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex flex-col justify-center will-change-transform">
-              {/* Soft Editorial Chapter Badge */}
-              <div className="hero-badge inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 ring-1 ring-white/5 backdrop-blur-md mb-6 w-fit select-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-lime shadow-[0_0_8px_#CBEB3A]" />
-                <span className="font-mono text-[11px] uppercase tracking-widest text-white/70">
-                  IEEE CS CHAPTER • 2026 COHORT
-                </span>
-              </div>
-
               <h1
                 ref={headlineRef}
                 className="font-display font-bold text-4xl sm:text-6xl md:text-7xl lg:text-[4.25rem] xl:text-[4.85rem] leading-[0.98] tracking-tight text-white mb-6 select-none"
