@@ -108,13 +108,13 @@ export default function MembershipPlans() {
           </p>
 
           {/* Interactive Sliding Pill Switch */}
-          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-black/[0.04] border border-black/10 backdrop-blur-md shadow-xs">
+          <div className="mt-8 inline-flex items-center p-1.5 rounded-full bg-black/[0.04] border border-black/10 backdrop-blur-md shadow-xs select-none">
             <button
               type="button"
               onClick={() => setBillingPeriod("annual")}
-              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer active:scale-[0.96] ${
                 billingPeriod === "annual"
-                  ? "bg-petrol text-white shadow-sm font-semibold"
+                  ? "bg-petrol text-white shadow-sm font-semibold scale-[1.02]"
                   : "text-black/60 hover:text-black"
               }`}
             >
@@ -123,9 +123,9 @@ export default function MembershipPlans() {
             <button
               type="button"
               onClick={() => setBillingPeriod("semester")}
-              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+              className={`relative px-5 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer active:scale-[0.96] ${
                 billingPeriod === "semester"
-                  ? "bg-petrol text-white shadow-sm font-semibold"
+                  ? "bg-petrol text-white shadow-sm font-semibold scale-[1.02]"
                   : "text-black/60 hover:text-black"
               }`}
             >
@@ -161,11 +161,11 @@ export default function MembershipPlans() {
                     : "bg-white/80 border border-black/5 shadow-xs"
                 }`}
               >
-                {/* Diffused subtle highlight for featured card */}
+                {/* Diffused subtle highlight for featured card (GPU radial gradient) */}
                 {plan.popular && (
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-petrol/[0.05] blur-2xl"
+                    className="pointer-events-none absolute -top-20 -right-20 w-48 h-48 rounded-full bg-[radial-gradient(circle_at_center,rgba(1,86,91,0.1)_0%,transparent_70%)] will-change-transform"
                   />
                 )}
 

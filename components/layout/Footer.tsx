@@ -188,17 +188,22 @@ export default function Footer() {
               <div className="flex items-center gap-1.5 mt-1">
                 <button
                   type="submit"
-                  className="group/btn inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02] cursor-pointer"
+                  className="group/btn relative overflow-hidden inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono font-bold text-xs uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.03] active:scale-[0.96] cursor-pointer select-none"
                 >
+                  {/* Liquid Sheen Sweep */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -translate-x-full group-hover/btn:translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  />
                   {subscribed ? (
-                    <span className="flex items-center gap-1.5">
+                    <span className="relative z-10 flex items-center gap-1.5">
                       <Check className="w-3.5 h-3.5" /> SUBSCRIBED
                     </span>
                   ) : (
-                    <span>JOIN DISPATCHES</span>
+                    <span className="relative z-10">JOIN DISPATCHES</span>
                   )}
-                  <span className="w-7 h-7 rounded-full bg-obsidian/15 flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                  <span className="relative z-10 w-7 h-7 rounded-full bg-obsidian/15 group-hover/btn:bg-obsidian/25 group-hover/btn:scale-105 flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5] transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
                   </span>
                 </button>
               </div>
@@ -265,10 +270,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#faq"
+                  href="#join"
                   className="text-white/70 hover:text-white transition-colors tracking-wider block"
                 >
-                  PROTOCOL FAQ
+                  CONTACT US
                 </Link>
               </li>
             </ul>
@@ -381,10 +386,15 @@ export default function Footer() {
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-lime hover:text-lime transition-all duration-300 cursor-pointer text-xs"
+            className="group relative overflow-hidden flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-lime/60 text-white/70 hover:text-lime transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.04] active:scale-[0.96] cursor-pointer text-xs select-none"
           >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            {/* Liquid Sheen Sweep */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            />
+            <span className="relative z-10">BACK TO TOP</span>
+            <ArrowUp className="relative z-10 w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5" />
           </button>
         </div>
       </div>

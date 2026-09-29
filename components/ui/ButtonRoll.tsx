@@ -41,7 +41,7 @@ export default function ButtonRoll({
   }[variant];
 
   const sharedClassName = clsx(
-    "group relative inline-flex items-center justify-center overflow-hidden rounded-full transition-all duration-300 select-none cursor-pointer",
+    "group relative inline-flex items-center justify-center overflow-hidden rounded-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] select-none cursor-pointer hover:scale-[1.03] active:scale-[0.96]",
     sizeStyles,
     variantStyles,
     className
@@ -49,10 +49,16 @@ export default function ButtonRoll({
 
   const content = (
     <>
+      {/* Dynamic Liquid Sheen Reflection Sweep */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      />
+
       {/* Content wrapper with dual-line roll */}
       <div className="relative overflow-hidden flex items-center justify-center bg-inherit text-inherit">
         {/* Main visible text that slides UP on hover */}
-        <span className="inline-flex items-center gap-2 bg-inherit text-inherit transform transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:-translate-y-[150%]">
+        <span className="inline-flex items-center gap-2 bg-inherit text-inherit transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[150%]">
           {withDot && (
             <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
           )}
@@ -62,7 +68,7 @@ export default function ButtonRoll({
         {/* Duplicate absolute text that rolls IN from bottom on hover */}
         <span
           aria-hidden="true"
-          className="absolute inset-0 inline-flex items-center justify-center gap-2 transform translate-y-[150%] transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-y-0"
+          className="absolute inset-0 inline-flex items-center justify-center gap-2 transform translate-y-[150%] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0"
         >
           {withDot && (
             <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
@@ -73,8 +79,8 @@ export default function ButtonRoll({
 
       {withArrow && (
         <div aria-hidden="true" className="ml-2 relative overflow-hidden w-4 h-4 flex items-center justify-center">
-          <ArrowUpRight className="w-4 h-4 transform transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-x-3 group-hover:-translate-y-3" />
-          <ArrowUpRight className="w-4 h-4 absolute transform -translate-x-3 translate-y-3 transition-transform duration-500 ease-[cubic-bezier(0.62,0.05,0.01,0.99)] group-hover:translate-x-0 group-hover:translate-y-0" />
+          <ArrowUpRight className="w-4 h-4 transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 group-hover:-translate-y-3" />
+          <ArrowUpRight className="w-4 h-4 absolute transform -translate-x-3 translate-y-3 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:translate-y-0" />
         </div>
       )}
     </>

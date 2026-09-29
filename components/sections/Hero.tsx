@@ -88,30 +88,20 @@ export default function Hero() {
       scrollTl.to(
         ".hero-media",
         {
-          yPercent: 18,
-          scale: 0.92,
-          opacity: 0.35,
+          yPercent: 14,
+          scale: 0.94,
+          opacity: 0.45,
           ease: "none",
         },
         0
       );
 
-      // 4. Background Sonar Matrix: Slower anchored drift for multi-plane parallax depth
-      scrollTl.to(
-        "canvas[aria-hidden='true']",
-        {
-          yPercent: 12,
-          ease: "none",
-        },
-        0
-      );
-
-      // 5. Radial Glow Wash: Synchronized soft drift
+      // 4. Radial Glow Wash: Synchronized soft drift
       scrollTl.to(
         ".hero-radial-glow",
         {
           yPercent: 15,
-          opacity: 0.4,
+          opacity: 0.3,
           ease: "none",
         },
         0
@@ -182,20 +172,30 @@ export default function Hero() {
               <div className="hero-cta flex flex-wrap items-center gap-5 sm:gap-6">
                 <a
                   href="#works"
-                  className="group relative cursor-pointer inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02]"
+                  className="group relative overflow-hidden cursor-pointer select-none inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.03] active:scale-[0.96]"
                 >
-                  <span>EXPLORE WORKS</span>
-                  <span className="w-7 h-7 rounded-full bg-obsidian/15 flex items-center justify-center text-obsidian transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                  {/* Liquid Sheen Sweep */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  />
+                  <span className="relative z-10">EXPLORE WORKS</span>
+                  <span className="relative z-10 w-7 h-7 rounded-full bg-obsidian/15 group-hover:bg-obsidian/25 group-hover:scale-105 flex items-center justify-center text-obsidian transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                    <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </a>
 
                 <a
                   href="#manifesto"
-                  className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-white/20 text-white/80 hover:text-white font-mono text-xs uppercase tracking-wider transition-all duration-300 backdrop-blur-sm"
+                  className="group relative overflow-hidden cursor-pointer select-none inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-white/25 text-white/80 hover:text-white font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.03] active:scale-[0.96] backdrop-blur-sm"
                 >
-                  <span>Read the manifesto</span>
-                  <span className="text-lime transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  {/* Liquid Sheen Sweep */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  />
+                  <span className="relative z-10">Read the manifesto</span>
+                  <span className="relative z-10 text-lime transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">→</span>
                 </a>
               </div>
             </div>
@@ -203,10 +203,10 @@ export default function Hero() {
             {/* Right Column: Interactive ASCII Veiled Statue with breathing room */}
             <div className="hero-media lg:col-span-6 xl:col-span-6 2xl:col-span-6 flex items-center justify-end w-full lg:translate-x-3 xl:translate-x-6 2xl:translate-x-8 will-change-transform">
               <div className="relative w-full max-w-[540px] sm:max-w-[620px] lg:max-w-[720px] xl:max-w-[820px] 2xl:max-w-[900px] flex justify-end ml-auto">
-                {/* Subtle studio rim backlight for photographic figure-ground separation */}
+                {/* Whisper-soft studio rim backlight for photographic figure-ground separation */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -inset-6 -z-10 rounded-full bg-[radial-gradient(ellipse_60%_55%_at_55%_48%,rgba(203,235,58,0.11)_0%,rgba(203,235,58,0.03)_50%,transparent_75%)] blur-2xl will-change-transform"
+                  className="pointer-events-none absolute -inset-4 -z-10 rounded-full bg-[radial-gradient(ellipse_55%_50%_at_55%_48%,rgba(203,235,58,0.035)_0%,transparent_70%)] will-change-transform"
                 />
                 <AsciiViewer />
               </div>

@@ -119,10 +119,10 @@ export default function DirectorateTracks() {
               >
                 {/* Inner Core Enclosure */}
                 <div className="relative rounded-[calc(2.25rem-0.5rem)] p-7 sm:p-8 bg-[#0a0e11]/95 border border-white/[0.04] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] flex flex-col justify-between h-full overflow-hidden backdrop-blur-xl">
-                  {/* Diffused ambient backlight */}
+                  {/* Diffused ambient backlight (GPU radial gradient) */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute -top-24 -right-24 w-48 h-48 rounded-full bg-lime/[0.03] group-hover:bg-lime/[0.09] blur-3xl transition-all duration-700"
+                    className="pointer-events-none absolute -top-24 -right-24 w-48 h-48 rounded-full bg-[radial-gradient(circle_at_center,rgba(203,235,58,0.06)_0%,transparent_70%)] group-hover:bg-[radial-gradient(circle_at_center,rgba(203,235,58,0.14)_0%,transparent_70%)] transition-all duration-700 will-change-transform"
                   />
 
                   <div>

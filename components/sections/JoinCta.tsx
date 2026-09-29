@@ -60,10 +60,11 @@ export default function JoinCta() {
       id="join"
       className="pt-20 pb-24 sm:pt-24 sm:pb-32 bg-obsidian text-white border-t border-white/10 relative z-10 overflow-hidden"
     >
-      {/* Background glow elements */}
+      <div id="contact" className="sr-only" aria-hidden="true" />
+      {/* Background glow elements - GPU-optimized radial gradient without heavy raster blur */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-petrol/15 rounded-full blur-[180px]"
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle_at_center,rgba(1,86,91,0.18)_0%,transparent_70%)] will-change-transform"
       />
 
       <div className="max-w-4xl mx-auto px-6 sm:px-8 relative z-10">
@@ -107,14 +108,14 @@ export default function JoinCta() {
               onSubmit={handleSubmit}
               className="relative rounded-[calc(2.5rem-0.625rem)] p-7 sm:p-11 bg-[#090d10]/95 backdrop-blur-2xl border border-white/[0.04] space-y-8 overflow-hidden"
             >
-              {/* Diffused ambient backlights */}
+              {/* Diffused ambient backlights (GPU radial gradients) */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -top-32 -left-32 w-64 h-64 rounded-full bg-petrol/[0.08] blur-3xl"
+                className="pointer-events-none absolute -top-32 -left-32 w-64 h-64 rounded-full bg-[radial-gradient(circle_at_center,rgba(1,86,91,0.2)_0%,transparent_70%)] will-change-transform"
               />
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-32 -right-32 w-64 h-64 rounded-full bg-lime/[0.03] blur-3xl"
+                className="pointer-events-none absolute -bottom-32 -right-32 w-64 h-64 rounded-full bg-[radial-gradient(circle_at_center,rgba(203,235,58,0.08)_0%,transparent_70%)] will-change-transform"
               />
 
               {/* Track selector pills */}
@@ -128,10 +129,10 @@ export default function JoinCta() {
                       key={track}
                       type="button"
                       onClick={() => setSelectedTrack(track)}
-                      className={`px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ${
+                      className={`px-4 py-2 rounded-full font-mono text-xs uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] select-none cursor-pointer active:scale-[0.96] ${
                         selectedTrack === track
                           ? "bg-lime text-obsidian font-bold shadow-[0_0_20px_rgba(203,235,58,0.25)] scale-[1.02]"
-                          : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10"
+                          : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10 hover:border-white/20 hover:scale-[1.02]"
                       }`}
                     >
                       {track}
@@ -250,11 +251,16 @@ export default function JoinCta() {
                 </div>
                 <button
                   type="submit"
-                  className="group relative cursor-pointer inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02] w-full sm:w-auto justify-center"
+                  className="group relative overflow-hidden cursor-pointer select-none inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.03] active:scale-[0.96] w-full sm:w-auto justify-center"
                 >
-                  <span>TRANSMIT APPLICATION</span>
-                  <span className="w-8 h-8 rounded-full bg-obsidian/15 flex items-center justify-center text-obsidian transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                    <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                  {/* Liquid Sheen Sweep */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  />
+                  <span className="relative z-10">TRANSMIT APPLICATION</span>
+                  <span className="relative z-10 w-8 h-8 rounded-full bg-obsidian/15 group-hover:bg-obsidian/25 group-hover:scale-105 flex items-center justify-center text-obsidian transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                    <ArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
                 </button>
               </div>

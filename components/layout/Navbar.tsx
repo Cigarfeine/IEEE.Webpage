@@ -23,7 +23,7 @@ export default function Navbar() {
     { name: "REVEAL", label: "Ideology", href: "#reveal", num: "03" },
     { name: "TRACKS", label: "Engineering Tracks", href: "#tracks", num: "04" },
     { name: "MEMBERSHIP", label: "Fellowship Plans", href: "#membership", num: "05" },
-    { name: "FAQ", label: "Protocol FAQ", href: "#faq", num: "06" },
+    { name: "CONTACT", label: "Contact Us", href: "#join", num: "06" },
   ];
 
   // Scroll detection for minimal backdrop transition
@@ -149,11 +149,16 @@ export default function Navbar() {
           <div className="justify-self-end hidden lg:inline-flex">
             <a
               href="#join"
-              className="group relative cursor-pointer select-none inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.02]"
+              className="group relative overflow-hidden cursor-pointer select-none inline-flex items-center gap-3 pl-5 pr-1.5 py-1.5 rounded-full bg-lime text-obsidian font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-lime/95 hover:shadow-[0_0_24px_rgba(203,235,58,0.35)] hover:scale-[1.03] active:scale-[0.96]"
             >
-              <span>Join chapter</span>
-              <span className="w-8 h-8 rounded-full bg-obsidian/15 flex items-center justify-center text-obsidian transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              {/* Liquid Sheen Sweep */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              />
+              <span className="relative z-10">Join chapter</span>
+              <span className="relative z-10 w-8 h-8 rounded-full bg-obsidian/15 group-hover:bg-obsidian/25 group-hover:scale-105 flex items-center justify-center text-obsidian transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                <ArrowUpRight className="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </a>
           </div>

@@ -96,7 +96,7 @@ export default function AccordionFaq() {
                   <button
                     type="button"
                     onClick={() => setOpenIdx(isOpen ? null : idx)}
-                    className="w-full px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 text-left select-none cursor-pointer"
+                    className="w-full px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between gap-4 text-left select-none cursor-pointer transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     aria-expanded={isOpen}
                   >
                     <div className="flex items-center gap-4 min-w-0">
@@ -109,7 +109,7 @@ export default function AccordionFaq() {
                     </div>
 
                     <div
-                      className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 ${
                         isOpen
                           ? "bg-lime/15 text-lime border-lime/40 rotate-180"
                           : "bg-white/[0.04] text-white/70 border-white/10 group-hover:text-lime group-hover:border-lime/30"
@@ -120,7 +120,7 @@ export default function AccordionFaq() {
                   </button>
 
                   <div
-                    className={`grid transition-[grid-template-rows,opacity,padding] duration-300 ease-out px-6 sm:px-8 ${
+                    className={`grid transition-[grid-template-rows,opacity,padding] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] px-6 sm:px-8 ${
                       isOpen ? "grid-rows-[1fr] opacity-100 pb-6 pl-14 sm:pl-16" : "grid-rows-[0fr] opacity-0 pb-0"
                     }`}
                   >

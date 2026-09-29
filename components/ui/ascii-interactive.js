@@ -57,7 +57,7 @@ class InteractiveAscii {
         bg: 'transparent',
         fg: '#CBEB3A',
         accent: '#DDF45B',
-        glow: 'rgba(203, 235, 58, 0.15)',
+        glow: 'rgba(203, 235, 58, 0.03)',
         secondary: '#a3e635'
       },
       amber: {
