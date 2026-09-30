@@ -16,41 +16,6 @@ export default function Hero() {
   useGSAP(
     () => {
       gsap.registerPlugin(ScrollTrigger);
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-      tl.from(".hero-title-line", {
-        opacity: 0,
-        y: 35,
-        duration: 0.9,
-        stagger: 0.12,
-        }, "-=0.4")
-        .from(
-          ".hero-desc",
-          {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-          },
-          "-=0.6"
-        )
-        .from(
-          ".hero-cta",
-          {
-            opacity: 0,
-            y: 20,
-            duration: 0.8,
-          },
-          "-=0.6"
-        )
-        .from(
-          ".hero-media",
-          {
-            opacity: 0,
-            scale: 0.95,
-            duration: 1,
-          },
-          "-=0.8"
-        );
 
       // Signature Good-Fella Multi-Plane Scroll Parallax
       const scrollTl = gsap.timeline({

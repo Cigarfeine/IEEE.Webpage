@@ -1,4 +1,6 @@
 import React from "react";
+import Preloader from "@/components/ui/Preloader";
+import PageTransition from "@/components/ui/PageTransition";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import VelocityMarquee from "@/components/sections/VelocityMarquee";
@@ -15,6 +17,12 @@ import Footer from "@/components/layout/Footer";
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-obsidian text-white selection:bg-lime selection:text-obsidian">
+      {/* Signature Preloading Sequence */}
+      <Preloader />
+
+      {/* Dynamic Route & Section Page Navigation Transition */}
+      <PageTransition />
+
       {/* Navigation Header */}
       <Navbar />
 

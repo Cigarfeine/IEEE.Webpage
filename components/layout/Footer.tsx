@@ -92,7 +92,9 @@ export default function Footer() {
   };
 
   const scrollToTop = () => {
-    if (typeof window !== "undefined" && (window as any).lenis) {
+    if (typeof window !== "undefined" && (window as any).triggerPageTransition) {
+      (window as any).triggerPageTransition("#hero");
+    } else if (typeof window !== "undefined" && (window as any).lenis) {
       (window as any).lenis.scrollTo(0);
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });

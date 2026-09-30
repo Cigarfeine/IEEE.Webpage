@@ -57,6 +57,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [menuOpen]);
 
+  // Automatically close menu when page transition starts
+  useEffect(() => {
+    const handleClose = () => setMenuOpen(false);
+    window.addEventListener("closeMenu", handleClose);
+    return () => window.removeEventListener("closeMenu", handleClose);
+  }, []);
+
   // Align sliding indicator square with hovered menu link
   useEffect(() => {
     const el = menuLinkRefs.current[hoveredIdx];
@@ -170,7 +177,7 @@ export default function Navbar() {
           GOOD-FELLA CURTAIN DRAWER (Opens Below Intact Header)
          ========================================================================= */}
       <div
-        className={`fixed inset-x-0 top-0 z-[90] bg-[#0a0d12]/98 backdrop-blur-3xl pt-28 sm:pt-32 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border-b border-white/10 overflow-y-auto max-h-screen ${
+        className={`fixed inset-x-0 top-0 z-[90] bg-[#080c0e] sm:bg-[#080c0e]/98 sm:backdrop-blur-3xl pt-24 sm:pt-32 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] border-b border-white/10 overflow-y-auto h-screen sm:h-auto sm:max-h-screen ${
           menuOpen
             ? "opacity-100 pointer-events-auto translate-y-0"
             : "opacity-0 pointer-events-none -translate-y-8"
